@@ -12,3 +12,10 @@ enum Table{
   nowusing,
   empty,
 }
+
+enum Worker{
+  cook,
+  serving,
+  table,
+  system,
+}
