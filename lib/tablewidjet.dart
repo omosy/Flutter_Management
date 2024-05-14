@@ -10,10 +10,8 @@ class TableWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 1.5),
       child: ElevatedButton(
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.white,
@@ -21,34 +19,42 @@ class TableWidgets extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5) )
         ),
           onPressed: (){},
-          child: Column(
-            children: [
-              Flexible(
-                  flex: 2,
-                  child: Row(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                vertical: 5.0,
+                horizontal: 0),
+            child: Column(
+              children: [
+                Flexible(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          child: Text("테이블$tablenum",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 13,
+                             fontWeight: FontWeight.w600,
+                          ),),
+                        ),
+                        Spacer(flex: 1,),
+                      ],
+                    ),
+                ),
+                Spacer(flex: 1,),
+                Flexible(
+                  flex: 8,
+                  child: Column(
                     children: [
-                      Flexible(
-                        flex: 2,
-                        child: Text("테이블$tablenum",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 13,
-                           fontWeight: FontWeight.w600,
-                        ),),
+                      Text("data2",
+                      style: TextStyle(color: Colors.black38,),
                       ),
-                      Spacer(flex: 1,),
                     ],
                   ),
-              ),
-              Flexible(
-                flex: 8,
-                child: Column(
-                  children: [
-                    Text("data2"),
-                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
       ),
     );
