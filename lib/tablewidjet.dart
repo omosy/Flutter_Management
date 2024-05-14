@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:joojumflutter/table_to_db.dart';
 
 class TableWidgets extends StatelessWidget {
   final int tablenum;
@@ -60,3 +61,24 @@ class TableWidgets extends StatelessWidget {
     );
   }
 }
+
+
+//완료 버튼 눌렸을 시!
+//테이블 착석 시
+//final ref = FirebaseFirestore.instance.collection("cody-preference-game").doc();
+//final id = ref.id;
+//final enteredAt = DateTime.now();
+//String formatDate = DateFormat('yyyy년 MM월 dd일 H시 mm분 ss초').format(createdAt);
+// final tableInfo = TableInfo(
+//     enteredAt: formatDate,
+//     tableNum: tableNum,
+//     numberOfPeople: numberOfPeople,
+//     yukhoe: yukhoe,
+//     jeyuk: jeyuk,
+//     sundae: sundae,
+//     corncheese: corncheese,
+//     nacho: nacho,
+//     eomooktang: eomooktang,
+//     hwangdo: hwangdo,
+// )
+// await ref.set(tableInfo.toMap());
