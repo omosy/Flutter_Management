@@ -47,7 +47,7 @@ class TableWidgets extends StatelessWidget {
                   flex: 8,
                   child: Column(
                     children: [
-                      Text("data2",
+                      Text("빈 테이블",
                       style: TextStyle(color: Colors.black38,),
                       ),
                     ],

@@ -7,7 +7,11 @@ class StatisticsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
+      body: Center(
+        child: Text("준비중!",
+        style: TextStyle(fontSize: 30),),
+      ),
       bottomNavigationBar: RouterNavigationBarWidget(),
     );
   }

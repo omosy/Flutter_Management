@@ -55,9 +55,34 @@ class _POSHomeState extends State<POSHome> {
               children: [
                 Spacer(flex: 1,),
                 Flexible(
-                  flex: 3,
+                  flex: 2,
                   child:
                     TableWidgets(tablenum: 1,),
+                ),
+                Flexible(
+                  flex: 2,
+                  child:
+                  TableWidgets(tablenum: 2,),
+                ),
+                Flexible(
+                  flex: 2,
+                  child:
+                  TableWidgets(tablenum: 3,),
+                ),
+                Flexible(
+                  flex: 2,
+                  child:
+                  TableWidgets(tablenum: 4,),
+                ),
+                Flexible(
+                  flex: 2,
+                  child:
+                  TableWidgets(tablenum: 5,),
+                ),
+                Flexible(
+                  flex: 2,
+                  child:
+                  TableWidgets(tablenum: 6,),
                 ),
                 Spacer(flex: 1,),
               ],

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "263730048454",
+    "project_id": "mijajoojum",
+    "storage_bucket": "mijajoojum.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263730048454:android:9cffa1ba915647af9f56c7",
+        "android_client_info": {
+          "package_name": "com.example.joojumflutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBti_EDkn-2fBdWGGIEq1ZP2PKkXxCohaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   go_router:
+  firebase_core:
   flutter:
     sdk: flutter
 
