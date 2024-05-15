@@ -28,7 +28,7 @@ class _TableWidgetsState extends State<TableWidgets> {
       padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 1.5),
       child: ElevatedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: widget.isPressed ? Colors.blue : Colors.white,
+          backgroundColor: tableNumProvider.tableNum == widget.tablenum ? Colors.blue : Colors.white,
           elevation: 0.5,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5) )
         ),

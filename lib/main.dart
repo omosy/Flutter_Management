@@ -143,79 +143,75 @@ class _POSHomeState extends State<POSHome> {
                       ],
                     ),
                   ),
-                  // Flexible(
-                  //   flex: 2,
-                  //   child: Row(
-                  //     children: [
-                  //       Spacer(flex: 1,),
-                  //       Flexible(
-                  //         flex: 1,
-                  //         child:
-                  //         TableWidgets(
-                  //           tablenum: 15,
-                  //           isPressed: false,
-                  //           selectedTableNum: context.watch()<TableNum>().tableNum,
-                  //         ),
-                  //       ),
-                  //       Spacer(flex: 1,),
-                  //     ],
-                  //   ),
-                  // ),
-                  // Flexible(
-                  //   flex: 2,
-                  //   child: Row(
-                  //     children: [
-                  //       Spacer(flex: 1,),
-                  //       Flexible(
-                  //         flex: 1,
-                  //         child:
-                  //         TableWidgets(
-                  //           tablenum: 14,
-                  //           isPressed: false,
-                  //           selectedTableNum: context.watch()<TableNum>().tableNum,
-                  //         ),
-                  //       ),
-                  //       Spacer(flex: 1,),
-                  //     ],
-                  //   ),
-                  // ),
-                  // Flexible(
-                  //   flex: 2,
-                  //   child: Row(
-                  //     children: [
-                  //       Spacer(flex: 1,),
-                  //       Flexible(
-                  //         flex: 1,
-                  //         child:
-                  //         TableWidgets(
-                  //           tablenum: 10,
-                  //           isPressed: false,
-                  //           selectedTableNum: context.watch()<TableNum>().tableNum,
-                  //         ),
-                  //       ),
-                  //       Spacer(flex: 1,),
-                  //     ],
-                  //   ),
-                  // ),
-                  // Flexible(
-                  //   flex: 2,
-                  //   child: Row(
-                  //     children: [
-                  //       Spacer(flex: 1,),
-                  //       Flexible(
-                  //         flex: 1,
-                  //         child:
-                  //         TableWidgets(
-                  //           tablenum: 11,
-                  //           isPressed: false,
-                  //           selectedTableNum: context.watch()<TableNum>().tableNum,
-                  //         ),
-                  //       ),
-                  //       Spacer(flex: 1,),
-                  //     ],
-                  //   ),
-                  // ),
-                  //Spacer(flex: 1,),
+                  Flexible(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 1,),
+                        Flexible(
+                          flex: 1,
+                          child:
+                          TableWidgets(
+                            tablenum: 15,
+                            isPressed: false,
+                            ),
+                        ),
+                        Spacer(flex: 1,),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 1,),
+                        Flexible(
+                          flex: 1,
+                          child:
+                          TableWidgets(
+                            tablenum: 14,
+                            isPressed: false,
+                            ),
+                        ),
+                        Spacer(flex: 1,),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 1,),
+                        Flexible(
+                          flex: 1,
+                          child:
+                          TableWidgets(
+                            tablenum: 10,
+                            isPressed: false,
+                            ),
+                        ),
+                        Spacer(flex: 1,),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 1,),
+                        Flexible(
+                          flex: 1,
+                          child:
+                          TableWidgets(
+                            tablenum: 11,
+                            isPressed: false,
+                          ),
+                        ),
+                        Spacer(flex: 1,),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 1,),
                 ],
               ),
             ),
