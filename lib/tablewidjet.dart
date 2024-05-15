@@ -1,25 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:joojumflutter/table_provider.dart';
 import 'package:joojumflutter/table_to_db.dart';
+import 'package:provider/provider.dart';
 
-class TableWidgets extends StatelessWidget {
+class TableWidgets extends StatefulWidget {
+  //final int selectedTableNum;
   final int tablenum;
-  const TableWidgets({
+  bool isPressed = false;
+  TableWidgets({
     super.key,
+    //required this.selectedTableNum,
     required this.tablenum,
+    required this.isPressed,
   });
 
+  @override
+  State<TableWidgets> createState() => _TableWidgetsState();
+}
+
+class _TableWidgetsState extends State<TableWidgets> {
+  //bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
+    final tableNumProvider = Provider.of<TableNum>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 1.5),
       child: ElevatedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: Colors.white,
+          backgroundColor: widget.isPressed ? Colors.blue : Colors.white,
           elevation: 0.5,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5) )
         ),
-          onPressed: (){},
+          onPressed: (){
+            tableNumProvider.change(widget.tablenum);
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(
                 vertical: 5.0,
@@ -32,7 +47,7 @@ class TableWidgets extends StatelessWidget {
                       children: [
                         Flexible(
                           flex: 2,
-                          child: Text("테이블$tablenum",
+                          child: Text("테이블${widget.tablenum}",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 13,
