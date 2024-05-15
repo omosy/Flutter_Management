@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:joojumflutter/table_provider.dart';
 import 'package:joojumflutter/table_to_db.dart';
@@ -23,6 +24,7 @@ class _TableWidgetsState extends State<TableWidgets> {
 
   @override
   Widget build(BuildContext context) {
+    final ref = FirebaseFirestore.instance.collection("table_id").doc("table${widget.tablenum}");
     final tableNumProvider = Provider.of<TableNum>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 1.5),

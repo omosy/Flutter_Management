@@ -211,7 +211,7 @@ class _POSHomeState extends State<POSHome> {
                       ],
                     ),
                   ),
-                  Spacer(flex: 1,),
+                 // Spacer(flex: 1,),
                 ],
               ),
             ),
