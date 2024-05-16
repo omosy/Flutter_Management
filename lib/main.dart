@@ -72,7 +72,6 @@ class _POSHomeState extends State<POSHome> {
 
   @override
   Widget build(BuildContext context) {
-    //final tableNumProvider = Provider.of<TableNum>(context);
     return ChangeNotifierProvider<TableNum>(
       create: (_)=>TableNum(),
       child: Scaffold(

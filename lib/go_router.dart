@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:joojumflutter/main.dart';
 import 'package:joojumflutter/stats_page.dart';
+import 'package:joojumflutter/table_to_db.dart';
 import 'package:joojumflutter/workers_page.dart';
 
 import 'firebase_options.dart';
@@ -13,6 +15,25 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // for(int i = 1; i<40; i++) {
+  //   final ref = FirebaseFirestore.instance.collection("table_id").doc(
+  //       'table$i');
+  //   final createdAt = DateTime.now();
+    //String formatDate = DateFormat('yyyy년 MM월 dd일 H시 mm분 ss초').format(createdAt);
+    //   final tableInfo = TableInfo(
+    //       enteredAt: DateTime.now(),
+    //       tableNum: i,
+    //       numberOfPeople: 0,
+    //       yukhoe: 0,
+    //       jeyuk: 0,
+    //       sundae: 0,
+    //       corncheese: 0,
+    //       nacho: 0,
+    //       eomooktang: 0,
+    //       hwangdo: 0,
+    //       moneysum: 0);
+    //   await ref.set(tableInfo.toMap());
+    // }// (초깃값 설정)
   runApp(const RouterApp());
 }
 

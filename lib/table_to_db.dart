@@ -9,6 +9,7 @@ class TableInfo {
   final int nacho;
   final int hwangdo;
   final int eomooktang;
+  final int moneysum;
 
   TableInfo({
     required this.enteredAt,
@@ -21,6 +22,7 @@ class TableInfo {
     required this.nacho,
     required this.eomooktang,
     required this.hwangdo,
+    required this.moneysum,
   });
 
   factory TableInfo.fromMap(Map<String, dynamic> map) =>
@@ -35,6 +37,7 @@ class TableInfo {
         nacho: map["nacho"]!,
         eomooktang: map["eomooktang"]!,
         hwangdo: map["hwangdo"]!,
+        moneysum: map["maneysum"]!,
       );
 
   Map<String, dynamic> toMap() => {
@@ -48,5 +51,6 @@ class TableInfo {
     "nacho": nacho,
     "eomooktang": eomooktang,
     "hwangdo": hwangdo,
+    "moneysum" : moneysum,
   };
 }

@@ -3,12 +3,43 @@ import 'package:flutter/material.dart';
 import 'package:joojumflutter/table_provider.dart';
 import 'package:provider/provider.dart';
 
+List<String> drawerListKor= [
+  //'입장료',
+  '육회',
+  '제육',
+  '순대',
+  '콘치즈',
+  '나초',
+  '어묵탕',
+  '황도',
+];
+
+List<String> drawerListEng= [
+  'yukhoe',
+  'jeyuk',
+  'sundae',
+  'corncheese',
+  'nacho',
+  'eomooktang',
+  'hwangdo',
+];
+
+List<int> priceList=[
+  9900,
+  10000,
+  10000,
+  7000,
+  5000,
+  7000,
+  7000,
+];
+
 class TableDrawerWidget extends StatefulWidget {
-  //late int tableNumbering;
+  late int numberedTable;
 
    TableDrawerWidget({
       super.key,
-      //required this.tableNumbering
+     // required this.numberedTable
    });
 
   @override
@@ -16,12 +47,15 @@ class TableDrawerWidget extends StatefulWidget {
 }
 
 class _TableDrawerWidgetState extends State<TableDrawerWidget> {
+  Future<int>? _tableNum;
   Future<DocumentSnapshot<Map<String, dynamic>>>? _fetchedData;
   //Stream<DocumentSnapshot<Map<String, dynamic>>>? _streamData;
 
   @override
   void initState() {
     super.initState();
+    //_tableNum = getTableNum();
+    //numberedTable = 1;
     _fetchedData = _future();
     //_streamData = _stream();
     // if (whichBalanceUri.isNotEmpty) {
@@ -32,54 +66,128 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
   @override
   Widget build(BuildContext context) {
     final tableNumProvider = Provider.of<TableNum>(context);
-    final tableNumber = tableNumProvider.tableNum;
+    final tableNumber =tableNumProvider.tableNum;
+    //numberedTable = tableNumber;
     //final ref = FirebaseFirestore.instance.collection("table_id").doc("table${tableNumber}");
     return Container(
       width: double.maxFinite,
-      color: Colors.white,
+      decoration: BoxDecoration(
+        border: Border(
+          left: BorderSide(color: Colors.black, width: 1)
+        )
+      ),
+      //color: Colors.pink,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Column(
-          children: [
-            Flexible(
-                flex: 1,
-                child: Text(
-                    "${tableNumber}번 테이블",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),),
-            ),
-            Flexible(
-              flex: 9,
-              child: FutureBuilder(
-                  future: _fetchedData,
-                  builder: (context, snapshot){
-                    if (snapshot.hasData){
-                      Map<String,dynamic>? snapshotData = snapshot.data!.data();
-                      return Column(
-                        children: [
-                          Text((snapshotData?['cornscheese']!=null) ? (snapshotData?['corncheese']) : "null!")
-                        ],
-                      );
-                    }
-                    else if(snapshot.hasError){
-                      return Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Text(
-                          '에러가 발생했습니다 ${snapshot.error}',
-                          textAlign: TextAlign.center,
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
+        child: FutureBuilder(
+          future: _fetchedData,
+          builder: (context, snapshot) {
+            if (snapshot.hasData){
+              Map<String,dynamic>? snapshotData = snapshot.data!.data();
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    flex: 2,
+                    child: Text(
+                      "${tableNumber}번 테이블 (${snapshotData!["numberOfPeople"]}명)",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),),
+                  ),
+                  Spacer(flex: 1,),
+                  Container(
+                    height: 50,
+                    child: Row(
+                    children: [
+                      Text('입장료',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),),
+                      Spacer(flex: 1,),
+                      Text('X${snapshotData!["numberOfPeople"]}',
                           style: TextStyle(
-                            fontSize: 17,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                        ),
+                      Spacer(flex: 1,),
+                      Text('${snapshotData!["numberOfPeople"] * 7000}원',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                      ),),
+                    ],
+                  ),),
+                  DrawerBucket(
+                      subject: drawerListKor[0],
+                      howMany: snapshotData!["${drawerListEng[0]}"],
+                      cost: snapshotData!["${drawerListEng[0]}"]*priceList[0]),
+                  DrawerBucket(
+                      subject: '${drawerListKor[1]}',
+                      howMany: snapshotData!["${drawerListEng[1]}"],
+                      cost: snapshotData!["${drawerListEng[1]}"]*priceList[1]),
+                  DrawerBucket(
+                      subject: drawerListKor[2],
+                      howMany: snapshotData!["${drawerListEng[2]}"],
+                      cost: snapshotData!["${drawerListEng[2]}"]*priceList[2]),
+                  DrawerBucket(
+                      subject: drawerListKor[3],
+                      howMany: snapshotData!["${drawerListEng[3]}"],
+                      cost: snapshotData!["${drawerListEng[3]}"]*priceList[3]),
+                  DrawerBucket(
+                      subject: drawerListKor[4],
+                      howMany: snapshotData!["${drawerListEng[4]}"],
+                      cost: snapshotData!["${drawerListEng[4]}"]*priceList[4]),
+                  DrawerBucket(
+                      subject: drawerListKor[5],
+                      howMany: snapshotData!["${drawerListEng[5]}"],
+                      cost: snapshotData!["${drawerListEng[5]}"]*priceList[5]),
+                  DrawerBucket(
+                      subject: drawerListKor[6],
+                      howMany: snapshotData!["${drawerListEng[6]}"],
+                      cost: snapshotData!["${drawerListEng[6]}"]*priceList[6]),
+                  Container(
+                    height: 50,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 1,),
+                        Text('총',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ),);
-                    }
-                    else {
-                      return const CircularProgressIndicator();
-                    }
-                  }),
-            )
-          ],
+                        ),
+                        Spacer(flex: 1,),
+                        Text('${snapshotData!["moneysum"]}원',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),),
+                      ],
+                    ),
+                  ),
+                  Spacer(flex: 1,)
+                ],
+              );
+            }
+            else if(snapshot.hasError){
+              return Padding(
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  '에러가 발생했습니다 ${snapshot.error}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                ),);
+            }
+            else {
+              return const CircularProgressIndicator();
+            }
+          }
         ),
       ),
       // decoration: BoxDecoration(
@@ -95,11 +203,59 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
   //   yield streamResult;
   // }
 
+  Future<int> getTableNum() async{
+    return Provider.of<TableNum>(context).tableNum;
+  }
+
   Future<DocumentSnapshot<Map<String, dynamic>>> _future() async {
     DocumentSnapshot<Map<String, dynamic>> result = await FirebaseFirestore.instance
         .collection('table_id')!
-        .doc('table1')
+        .doc('table${widget.numberedTable}')
         .get();
     return result;
+  }
+}
+
+class DrawerBucket extends StatelessWidget {
+  final String subject;
+  final int howMany;
+  final int cost;
+  const DrawerBucket({
+    super.key,
+    required this.subject,
+    required this.howMany,
+    required this.cost,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Text('$subject',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),),
+          ),
+          //Spacer(flex: 1,),
+          Text('X$howMany',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          //Spacer(flex: 1,),
+          Text('${howMany * cost}원',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),),
+        ],
+      ),
+    );
   }
 }
