@@ -31,7 +31,7 @@ dependencies:
   cloud_firestore:
   provider:
   go_router:
-  firebase_core:
+  firebase_core: ^2.24.2
   flutter:
     sdk: flutter
 

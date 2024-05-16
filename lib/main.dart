@@ -1,6 +1,8 @@
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:joojumflutter/common_navigationbar.dart';
+import 'package:joojumflutter/firebase_options.dart';
 import 'package:joojumflutter/table_drawer.dart';
 import 'package:joojumflutter/table_provider.dart';
 import 'package:joojumflutter/tablewidjet.dart';
@@ -8,7 +10,11 @@ import 'package:provider/provider.dart';
 
 
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
       MyApp(),
   );
@@ -66,6 +72,7 @@ class _POSHomeState extends State<POSHome> {
 
   @override
   Widget build(BuildContext context) {
+    //final tableNumProvider = Provider.of<TableNum>(context);
     return ChangeNotifierProvider<TableNum>(
       create: (_)=>TableNum(),
       child: Scaffold(
