@@ -48,7 +48,7 @@ class TableDrawerWidget extends StatefulWidget {
 
 class _TableDrawerWidgetState extends State<TableDrawerWidget> {
   Future<int>? _tableNum;
-  Future<DocumentSnapshot<Map<String, dynamic>>>? _fetchedData;
+  Stream<DocumentSnapshot<Map<String, dynamic>>>? _fetchedData;
   //Stream<DocumentSnapshot<Map<String, dynamic>>>? _streamData;
 
   @override
@@ -56,7 +56,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
     super.initState();
     //_tableNum = getTableNum();
     //numberedTable = 1;
-    _fetchedData = _future();
+    _fetchedData = _stream();
     //_streamData = _stream();
     // if (whichBalanceUri.isNotEmpty) {
     //   whichBalanceUri.clear();
@@ -79,8 +79,8 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
       //color: Colors.pink,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
-        child: FutureBuilder(
-          future: _fetchedData,
+        child: StreamBuilder(
+          stream: _fetchedData,
           builder: (context, snapshot) {
             if (snapshot.hasData){
               Map<String,dynamic>? snapshotData = snapshot.data!.data();
@@ -169,7 +169,56 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                       ],
                     ),
                   ),
-                  Spacer(flex: 1,)
+                  Spacer(flex: 1,),
+                  Flexible(
+                      flex: 1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              elevation: 0,
+                            ),
+                            onPressed: (){},
+                            child: Flexible(
+                              flex: 1,
+                              child: Container(
+                                //height: double.maxFinite,
+                                decoration: BoxDecoration(
+                                  //color: Colors.black,
+                                ),
+                                child: Text("주문하기",),
+                              ),
+                            )),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black,
+                                elevation: 0,
+                              ),
+                              onPressed: (){},
+                              child: Flexible(
+                                flex: 1,
+                                child: Container(
+                                 // height: double.maxFinite,
+                                  child: Text("이동하기"),
+                                ),
+                              )),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black,
+                                elevation: 0,
+                              ),
+                              onPressed: (){},
+                              child: Flexible(
+                                flex: 1,
+                                child: Container(
+                                  //height: double.maxFinite,
+                                  child: Text("자리비움"),
+                                ),
+                              )),
+                        ],
+                      ))
                 ],
               );
             }
@@ -207,12 +256,12 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
     return Provider.of<TableNum>(context).tableNum;
   }
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> _future() async {
+  Stream<DocumentSnapshot<Map<String, dynamic>>> _stream() async* {
     DocumentSnapshot<Map<String, dynamic>> result = await FirebaseFirestore.instance
         .collection('table_id')!
-        .doc('table${widget.numberedTable}')
+        .doc('table1')
         .get();
-    return result;
+    yield result;
   }
 }
 
