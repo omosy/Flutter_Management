@@ -6,11 +6,13 @@ import 'package:provider/provider.dart';
 
 class TableWidgets extends StatefulWidget {
   //final int selectedTableNum;
+  late int number;
   final int tablenum;
   bool isPressed = false;
   TableWidgets({
     super.key,
     //required this.selectedTableNum,
+    required this.number,
     required this.tablenum,
     required this.isPressed,
   });
@@ -21,6 +23,13 @@ class TableWidgets extends StatefulWidget {
 
 class _TableWidgetsState extends State<TableWidgets> {
   //bool isPressed = false;
+  Stream<DocumentSnapshot<Map<String, dynamic>>>? _fetchedData;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchedData = _stream();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +72,40 @@ class _TableWidgetsState extends State<TableWidgets> {
                 Spacer(flex: 1,),
                 Flexible(
                   flex: 8,
-                  child: Column(
-                    children: [
-                      Text("빈 테이블",
-                      style: TextStyle(color: Colors.black38,),
-                      ),
-                    ],
+                  child: StreamBuilder(
+                    stream: _fetchedData,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData){
+                        final ref = snapshot.data!.data();
+                        return Column(
+                          children: [
+                            Text(
+                              "빈 테이블",
+                              style: TextStyle(
+                                color: Colors.black38,
+                              ),
+                            ),
+                            Text("콘치즈: ${ref!["corncheese"]} 개",
+                              style: TextStyle(color: Colors.black),
+                                )
+                          ],
+                        );
+                      }
+                      else if(snapshot.hasError){
+                        return Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Text(
+                            '에러가 발생했습니다 ${snapshot.error}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),);
+                      }
+                      else {
+                        return const CircularProgressIndicator();
+                      }
+                    }
                   ),
                 ),
               ],
@@ -76,6 +113,13 @@ class _TableWidgetsState extends State<TableWidgets> {
           ),
       ),
     );
+  }
+  Stream<DocumentSnapshot<Map<String, dynamic>>> _stream() async* {
+    DocumentSnapshot<Map<String, dynamic>> result = await FirebaseFirestore.instance
+        .collection('table_id')!
+        .doc('table${widget.number}')
+        .get();
+    yield result;
   }
 }
 
