@@ -39,7 +39,7 @@ class TableDrawerWidget extends StatefulWidget {
 
    TableDrawerWidget({
       super.key,
-     // required this.numberedTable
+      required this.numberedTable
    });
 
   @override
@@ -83,7 +83,6 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
           stream: _fetchedData,
           builder: (context, snapshot) {
             if (snapshot.hasData){
-
               Map<String,dynamic>? snapshotData = snapshot.data!.data();
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -260,7 +259,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
   Stream<DocumentSnapshot<Map<String, dynamic>>> _stream() async* {
     DocumentSnapshot<Map<String, dynamic>> result = await FirebaseFirestore.instance
         .collection('table_id')!
-        .doc('table1')
+        .doc('table${widget.numberedTable}')
         .get();
     yield result;
   }

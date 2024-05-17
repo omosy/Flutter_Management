@@ -44,8 +44,10 @@ class _TableWidgetsState extends State<TableWidgets> {
           elevation: 0.5,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5) )
         ),
-          onPressed: (){
+          onPressed: () async{
             tableNumProvider.change(widget.tablenum);
+            FirebaseFirestore.instance.collection('table_id').doc("NowTable").set(
+                {"nowtable": tableNumProvider.tableNum});
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(
