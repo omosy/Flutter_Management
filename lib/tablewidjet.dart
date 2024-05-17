@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:joojumflutter/table_provider.dart';
 import 'package:joojumflutter/table_to_db.dart';
 import 'package:provider/provider.dart';
@@ -77,6 +78,8 @@ class _TableWidgetsState extends State<TableWidgets> {
                     builder: (context, snapshot) {
                       if (snapshot.hasData){
                         final ref = snapshot.data!.data();
+                        DateTime _enteredAt = ref!["enteredAt"].toDate();
+                        String enteredhhmm = DateFormat('HH시 MM분').format(_enteredAt);
                         return Column(
                           children: [
                             Text(
@@ -85,9 +88,15 @@ class _TableWidgetsState extends State<TableWidgets> {
                                 color: Colors.black38,
                               ),
                             ),
-                            Text("콘치즈: ${ref!["corncheese"]} 개",
+                            Text("입장: ${enteredhhmm}",
                               style: TextStyle(color: Colors.black),
-                                )
+                                ),
+                            Text("인원수: ${ref!["numberOfPeople"]}명",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            Text("성별: 남자",
+                              style: TextStyle(color: Colors.black),
+                            ),
                           ],
                         );
                       }

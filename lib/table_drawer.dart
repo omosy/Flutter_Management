@@ -83,6 +83,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
           stream: _fetchedData,
           builder: (context, snapshot) {
             if (snapshot.hasData){
+
               Map<String,dynamic>? snapshotData = snapshot.data!.data();
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

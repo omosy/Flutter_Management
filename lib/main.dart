@@ -145,6 +145,14 @@ class _POSHomeState extends State<POSHome> {
                             isPressed: false, number: 6,
                           ),
                         ),
+                        Flexible(
+                          flex: 2,
+                          child:
+                          TableWidgets(
+                            tablenum: 7,
+                            isPressed: false, number: 7,
+                          ),
+                        ),
                         Spacer(flex: 1,),
                       ],
                     ),
@@ -157,25 +165,17 @@ class _POSHomeState extends State<POSHome> {
                         Flexible(
                           flex: 2,
                           child:
-                            TableWidgets(
-                              tablenum: 7,
-                              isPressed: false, number: 7,
-                            ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child:
                           TableWidgets(
                             tablenum: 8,
                             isPressed: false, number: 8,
-                            ),
+                          ),
                         ),
                         Flexible(
                           flex: 2,
                           child:
-                          TableWidgets(
-                            tablenum: 9,
-                            isPressed: false, number: 9,
+                            TableWidgets(
+                              tablenum: 9,
+                              isPressed: false, number: 9,
                             ),
                         ),
                         Flexible(
@@ -202,6 +202,22 @@ class _POSHomeState extends State<POSHome> {
                             isPressed: false, number: 12,
                             ),
                         ),
+                        Flexible(
+                          flex: 2,
+                          child:
+                          TableWidgets(
+                            tablenum: 13,
+                            isPressed: false, number: 13,
+                            ),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child:
+                          TableWidgets(
+                            tablenum: 14,
+                            isPressed: false, number: 14,
+                            ),
+                        ),
                         Spacer(flex: 1,),
                       ],
                     ),
@@ -211,22 +227,6 @@ class _POSHomeState extends State<POSHome> {
                     child: Row(
                       children: [
                         Spacer(flex: 1,),
-                        Flexible(
-                          flex: 2,
-                          child:
-                          TableWidgets(
-                            tablenum: 13,
-                            isPressed: false, number: 13,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child:
-                          TableWidgets(
-                            tablenum: 14,
-                            isPressed: false, number: 14,
-                          ),
-                        ),
                         Flexible(
                           flex: 2,
                           child:
@@ -259,15 +259,6 @@ class _POSHomeState extends State<POSHome> {
                             isPressed: false, number: 18,
                           ),
                         ),
-                        Spacer(flex: 1,),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Spacer(flex: 1,),
                         Flexible(
                           flex: 2,
                           child:
@@ -292,6 +283,15 @@ class _POSHomeState extends State<POSHome> {
                             isPressed: false, number: 21,
                           ),
                         ),
+                        Spacer(flex: 1,),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 1,),
                         Flexible(
                           flex: 2,
                           child:
@@ -316,15 +316,6 @@ class _POSHomeState extends State<POSHome> {
                             isPressed: false, number: 24,
                           ),
                         ),
-                        Spacer(flex: 1,),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Spacer(flex: 1,),
                         Flexible(
                           flex: 2,
                           child:
@@ -357,6 +348,15 @@ class _POSHomeState extends State<POSHome> {
                             isPressed: false, number: 28,
                           ),
                         ),
+                        Spacer(flex: 1,),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Spacer(flex: 1,),
                         Flexible(
                           flex: 2,
                           child:
@@ -371,6 +371,46 @@ class _POSHomeState extends State<POSHome> {
                           TableWidgets(
                             tablenum: 30,
                             isPressed: false, number: 30,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child:
+                          TableWidgets(
+                            tablenum: 31,
+                            isPressed: false, number: 31,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child:
+                          TableWidgets(
+                            tablenum: 32,
+                            isPressed: false, number: 32,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child:
+                          TableWidgets(
+                            tablenum: 33,
+                            isPressed: false, number: 33,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child:
+                          TableWidgets(
+                            tablenum: 34,
+                            isPressed: false, number: 34,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child:
+                          TableWidgets(
+                            tablenum: 35,
+                            isPressed: false, number: 35,
                           ),
                         ),
                         Spacer(flex: 1,),
