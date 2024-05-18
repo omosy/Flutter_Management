@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:joojumflutter/enums.dart';
+import 'package:joojumflutter/streams.dart';
 import 'package:joojumflutter/table_provider.dart';
 import 'package:joojumflutter/table_to_db.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +38,7 @@ class _TableWidgetsState extends State<TableWidgets> {
     super.initState();
     _nopvalue = null;
     _sexualvalue = null;
-    _fetchedData = _stream();
+    _fetchedData = tableStream(widget.tablenum);
   }
 
   @override
@@ -146,6 +148,10 @@ class _TableWidgetsState extends State<TableWidgets> {
                                       "isUsing": true,
                                       "enteredAt": Timestamp.fromDate(DateTime.now()),
                                     });
+                                    setState(() {
+                                      _fetchedData=tableStream(widget.tablenum);
+                                      //super.initState();
+                                    });
                                     Navigator.of(context).pop();
                                   }
                                   //context.go('/${RoutePath.home.name}');
@@ -154,6 +160,9 @@ class _TableWidgetsState extends State<TableWidgets> {
                             ],
                           );
                         });
+                  }
+                  else if(ref!["isUsing"]==true){
+                    context.go("/Drawer?id=${widget.tablenum}");
                   }
                 },
                 child: Padding(
@@ -239,13 +248,6 @@ class _TableWidgetsState extends State<TableWidgets> {
         }
         }
     );
-  }
-  Stream<DocumentSnapshot<Map<String, dynamic>>> _stream() async* {
-    DocumentSnapshot<Map<String, dynamic>> result = await FirebaseFirestore.instance
-        .collection('table_id')!
-        .doc('table${widget.number}')
-        .get();
-    yield result;
   }
 }
 

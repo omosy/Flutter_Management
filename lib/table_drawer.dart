@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:joojumflutter/appbar.dart';
+import 'package:joojumflutter/streams.dart';
 import 'package:joojumflutter/table_provider.dart';
 import 'package:joojumflutter/table_to_db.dart';
 import 'package:provider/provider.dart';
@@ -37,11 +40,13 @@ List<int> priceList=[
 
 class TableDrawerScaffold extends StatelessWidget {
   late int numberedTable;
-   TableDrawerScaffold({super.key});
+   TableDrawerScaffold({super.key,
+   required this.numberedTable});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CommonAppBarWidget(),
       body: TableDrawerWidget(numberedTable: numberedTable,),
     );
   }
@@ -79,8 +84,8 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final tableNumProvider = Provider.of<TableNum>(context);
-    final tableNumber =tableNumProvider.tableNum;
+    //final tableNumProvider = Provider.of<TableNum>(context);
+    //final tableNumber =tableNumProvider.tableNum;
     //numberedTable = tableNumber;
     //final ref = FirebaseFirestore.instance.collection("table_id").doc("table${tableNumber}");
     return Container(
@@ -104,7 +109,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                   Flexible(
                     flex: 2,
                     child: Text(
-                      "${tableNumber}번 테이블 (${snapshotData!["numberOfPeople"]}명)",
+                      "${snapshotData!["tableNum"]}번 테이블 (${snapshotData!["numberOfPeople"]}명)",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -261,6 +266,8 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                     .doc("table${snapshotData!["tableNum"]}")
                                                     .update(tableInfo.toMap());
                                                 Navigator.of(context).pop();
+                                                context.go('/');
+                                                await tableStream(snapshotData!["tableNum"]);
                                               }
                                           ),
                                         ],
@@ -306,9 +313,9 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
   //   yield streamResult;
   // }
 
-  Future<int> getTableNum() async{
-    return Provider.of<TableNum>(context).tableNum;
-  }
+  // Future<int> getTableNum() async{
+  //   return Provider.of<TableNum>(context).tableNum;
+  // }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> _stream() async* {
     DocumentSnapshot<Map<String, dynamic>> result = await FirebaseFirestore.instance
