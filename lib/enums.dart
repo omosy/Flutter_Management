@@ -19,3 +19,19 @@ enum Worker{
   table,
   system,
 }
+
+enum Sexuallities{
+  male,
+  female,
+  non,
+}
+
+enum NOP{
+  one,
+  two,
+  three,
+  four,
+  five,
+  six,
+  seven,
+}

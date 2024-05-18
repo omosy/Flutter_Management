@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class TableInfo {
-  final DateTime enteredAt;
+  final Timestamp enteredAt;
   final int tableNum;
   final int numberOfPeople;
   final int yukhoe;
@@ -10,6 +12,8 @@ class TableInfo {
   final int hwangdo;
   final int eomooktang;
   final int moneysum;
+  final String sexuallity;
+  final bool isusing = false;
 
   TableInfo({
     required this.enteredAt,
@@ -23,6 +27,7 @@ class TableInfo {
     required this.eomooktang,
     required this.hwangdo,
     required this.moneysum,
+    required this.sexuallity,
   });
 
   factory TableInfo.fromMap(Map<String, dynamic> map) =>
@@ -37,7 +42,8 @@ class TableInfo {
         nacho: map["nacho"]!,
         eomooktang: map["eomooktang"]!,
         hwangdo: map["hwangdo"]!,
-        moneysum: map["maneysum"]!,
+        moneysum: map["moneysum"]!,
+        sexuallity: map["sexuallity"]!
       );
 
   Map<String, dynamic> toMap() => {
@@ -52,5 +58,7 @@ class TableInfo {
     "eomooktang": eomooktang,
     "hwangdo": hwangdo,
     "moneysum" : moneysum,
+    "sexuallity" : sexuallity,
+    "isUsing" : isusing,
   };
 }

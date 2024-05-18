@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:joojumflutter/table_provider.dart';
+import 'package:joojumflutter/table_to_db.dart';
 import 'package:provider/provider.dart';
 
 List<String> drawerListKor= [
@@ -33,6 +34,19 @@ List<int> priceList=[
   7000,
   7000,
 ];
+
+class TableDrawerScaffold extends StatelessWidget {
+  late int numberedTable;
+   TableDrawerScaffold({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: TableDrawerWidget(numberedTable: numberedTable,),
+    );
+  }
+}
+
 
 class TableDrawerWidget extends StatefulWidget {
   late int numberedTable;
@@ -181,15 +195,12 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                               elevation: 0,
                             ),
                             onPressed: (){},
-                            child: Flexible(
-                              flex: 1,
-                              child: Container(
-                                //height: double.maxFinite,
-                                decoration: BoxDecoration(
-                                  //color: Colors.black,
-                                ),
-                                child: Text("주문하기",),
+                            child: Container(
+                              //height: double.maxFinite,
+                              decoration: BoxDecoration(
+                                //color: Colors.black,
                               ),
+                              child: Text("주문하기",),
                             )),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -197,25 +208,68 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                 elevation: 0,
                               ),
                               onPressed: (){},
-                              child: Flexible(
-                                flex: 1,
-                                child: Container(
-                                 // height: double.maxFinite,
-                                  child: Text("이동하기"),
-                                ),
+                              child: Container(
+                               // height: double.maxFinite,
+                                child: Text("이동하기"),
                               )),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.black,
                                 elevation: 0,
                               ),
-                              onPressed: (){},
-                              child: Flexible(
-                                flex: 1,
-                                child: Container(
-                                  //height: double.maxFinite,
-                                  child: Text("자리비움"),
-                                ),
+                              onPressed: () async{
+                                showDialog(
+                                    context: context,
+                                    builder: (context){
+                                      return AlertDialog(
+                                        title: Text("자리비움"),
+                                        content: Text("자리를 비우시겠습니까?"),
+                                        actions: [
+                                          TextButton(
+                                            child: const Text(
+                                              '취소',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: const Text(
+                                              '확인',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            onPressed: () async {
+                                                final tableInfo = TableInfo(
+                                                enteredAt: Timestamp.fromDate(DateTime.now()),
+                                                tableNum: snapshotData!["tableNum"],
+                                                numberOfPeople: 0,
+                                                yukhoe: 0,
+                                                jeyuk: 0, sundae: 0,
+                                                corncheese: 0,
+                                                nacho: 0,
+                                                eomooktang: 0,
+                                                hwangdo: 0,
+                                                moneysum: 0,
+                                                sexuallity: "none");
+                                                await FirebaseFirestore.instance
+                                                    .collection('table_id')
+                                                    .doc("table${snapshotData!["tableNum"]}")
+                                                    .update(tableInfo.toMap());
+                                                Navigator.of(context).pop();
+                                              }
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                              child: Container(
+                                //height: double.maxFinite,
+                                child: Text("자리비움"),
                               )),
                         ],
                       ))

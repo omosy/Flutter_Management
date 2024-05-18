@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:joojumflutter/main.dart';
 import 'package:joojumflutter/stats_page.dart';
+import 'package:joojumflutter/table_drawer.dart';
 import 'package:joojumflutter/table_to_db.dart';
 import 'package:joojumflutter/workers_page.dart';
 
@@ -18,7 +19,7 @@ void main() async{
   // for(int i = 1; i<40; i++) {
   //   final ref = FirebaseFirestore.instance.collection("table_id").doc(
   //       'table$i');
-  //   final createdAt = DateTime.now();
+    //final createdAt = DateTime.now();
     //String formatDate = DateFormat('yyyy년 MM월 dd일 H시 mm분 ss초').format(createdAt);
     //   final tableInfo = TableInfo(
     //       enteredAt: DateTime.now(),
@@ -31,11 +32,14 @@ void main() async{
     //       nacho: 0,
     //       eomooktang: 0,
     //       hwangdo: 0,
-    //       moneysum: 0);
+    //       moneysum: 0,
+    //       sexuallity: 'null',
+    //   );
     //   await ref.set(tableInfo.toMap());
     // }// (초깃값 설정)
   runApp(const RouterApp());
 }
+late int num_table;
 
 final GoRouter _router = GoRouter(
   initialLocation: "/",
@@ -44,14 +48,15 @@ final GoRouter _router = GoRouter(
       path: "/",
       pageBuilder: (context, state) =>
       const NoTransitionPage(child: POSHome(title: 'AE MANAGEMENT SYS.'),
-      // routes: [
-      //   GoRoute(
-      //     path: 'SelectTheme',
-      //     pageBuilder: (context, state) =>
-      //     const NoTransitionPage(child: ThemeSelectScreen()),
-      //   )
-      // ],
-    ),),
+    ),
+      routes: [
+        GoRoute(
+        path: 'Drawer',
+        pageBuilder: (context, state) => NoTransitionPage(
+            child: TableDrawerScaffold(
+              )),
+      ),]
+    ),
     GoRoute(
       path: '/Workers',
       pageBuilder: (context, state) => const NoTransitionPage(
