@@ -8,3 +8,11 @@ Stream<DocumentSnapshot<Map<String, dynamic>>> tableStream(int number) async* {
       .get();
   yield result;
 }
+
+Stream<DocumentSnapshot<Map<String, dynamic>>> tableNumStream() async* {
+  DocumentSnapshot<Map<String, dynamic>> result = await FirebaseFirestore.instance
+      .collection('table_id')!
+      .doc('NowTable')
+      .get();
+  yield result;
+}

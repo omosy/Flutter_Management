@@ -27,10 +27,10 @@ class TableWidgets extends StatefulWidget {
 }
 
 class _TableWidgetsState extends State<TableWidgets> {
+  Stream<DocumentSnapshot<Map<String, dynamic>>>? _tableWidgetFetchedData;
   //bool isPressed = false;
   late String? _sexualvalue;
   late int? _nopvalue;
-  Stream<DocumentSnapshot<Map<String, dynamic>>>? _fetchedData;
 
 
   @override
@@ -38,14 +38,14 @@ class _TableWidgetsState extends State<TableWidgets> {
     super.initState();
     _nopvalue = null;
     _sexualvalue = null;
-    _fetchedData = tableStream(widget.tablenum);
+    _tableWidgetFetchedData = tableStream(widget.tablenum);
   }
 
   @override
   Widget build(BuildContext context) {
     final tableNumProvider = Provider.of<TableNum>(context);
     return StreamBuilder(
-      stream: _fetchedData,
+      stream: _tableWidgetFetchedData,
       builder: (context, snapshot) {
         if(snapshot.hasData){
           final ref = snapshot.data!.data();
@@ -137,6 +137,7 @@ class _TableWidgetsState extends State<TableWidgets> {
                                   ),
                                 ),
                                 onPressed: () async {
+                                  final DateTime nowdate = DateTime.now();
                                   if (_nopvalue != null &&
                                       _sexualvalue != null) {
                                     await FirebaseFirestore.instance
@@ -146,10 +147,10 @@ class _TableWidgetsState extends State<TableWidgets> {
                                       "sexuallity": _sexualvalue,
                                       "numberOfPeople": _nopvalue,
                                       "isUsing": true,
-                                      "enteredAt": Timestamp.fromDate(DateTime.now()),
+                                      "enteredAt": Timestamp.fromDate(nowdate),
                                     });
                                     setState(() {
-                                      _fetchedData=tableStream(widget.tablenum);
+                                      _tableWidgetFetchedData=tableStream(widget.tablenum);
                                       //super.initState();
                                     });
                                     Navigator.of(context).pop();
@@ -161,9 +162,9 @@ class _TableWidgetsState extends State<TableWidgets> {
                           );
                         });
                   }
-                  else if(ref!["isUsing"]==true){
-                    context.go("/Drawer?id=${widget.tablenum}");
-                  }
+                  setState(() {
+                    tableStream(widget.tablenum);
+                  });
                 },
                 child: Padding(
                   padding:

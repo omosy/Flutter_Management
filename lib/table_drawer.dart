@@ -5,6 +5,7 @@ import 'package:joojumflutter/appbar.dart';
 import 'package:joojumflutter/streams.dart';
 import 'package:joojumflutter/table_provider.dart';
 import 'package:joojumflutter/table_to_db.dart';
+import 'package:joojumflutter/tablewidjet.dart';
 import 'package:provider/provider.dart';
 
 List<String> drawerListKor= [
@@ -73,13 +74,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
   @override
   void initState() {
     super.initState();
-    //_tableNum = getTableNum();
-    //numberedTable = 1;
-    _fetchedData = _stream();
-    //_streamData = _stream();
-    // if (whichBalanceUri.isNotEmpty) {
-    //   whichBalanceUri.clear();
-    // }
+    _fetchedData = tableStream(widget.numberedTable);
   }
 
   @override
@@ -116,170 +111,187 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                       ),),
                   ),
                   Spacer(flex: 1,),
-                  Container(
-                    height: 50,
-                    child: Row(
-                    children: [
-                      Text('입장료',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),),
-                      Spacer(flex: 1,),
-                      Text('X${snapshotData!["numberOfPeople"]}',
-                          style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                        ),
-                      Spacer(flex: 1,),
-                      Text('${snapshotData!["numberOfPeople"] * 7000}원',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                      ),),
-                    ],
-                  ),),
-                  DrawerBucket(
-                      subject: drawerListKor[0],
-                      howMany: snapshotData!["${drawerListEng[0]}"],
-                      cost: snapshotData!["${drawerListEng[0]}"]*priceList[0]),
-                  DrawerBucket(
-                      subject: '${drawerListKor[1]}',
-                      howMany: snapshotData!["${drawerListEng[1]}"],
-                      cost: snapshotData!["${drawerListEng[1]}"]*priceList[1]),
-                  DrawerBucket(
-                      subject: drawerListKor[2],
-                      howMany: snapshotData!["${drawerListEng[2]}"],
-                      cost: snapshotData!["${drawerListEng[2]}"]*priceList[2]),
-                  DrawerBucket(
-                      subject: drawerListKor[3],
-                      howMany: snapshotData!["${drawerListEng[3]}"],
-                      cost: snapshotData!["${drawerListEng[3]}"]*priceList[3]),
-                  DrawerBucket(
-                      subject: drawerListKor[4],
-                      howMany: snapshotData!["${drawerListEng[4]}"],
-                      cost: snapshotData!["${drawerListEng[4]}"]*priceList[4]),
-                  DrawerBucket(
-                      subject: drawerListKor[5],
-                      howMany: snapshotData!["${drawerListEng[5]}"],
-                      cost: snapshotData!["${drawerListEng[5]}"]*priceList[5]),
-                  DrawerBucket(
-                      subject: drawerListKor[6],
-                      howMany: snapshotData!["${drawerListEng[6]}"],
-                      cost: snapshotData!["${drawerListEng[6]}"]*priceList[6]),
-                  Container(
-                    height: 50,
-                    child: Row(
-                      children: [
-                        Spacer(flex: 1,),
-                        Text('총',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Spacer(flex: 1,),
-                        Text('${snapshotData!["moneysum"]}원',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),),
-                      ],
-                    ),
-                  ),
-                  Spacer(flex: 1,),
                   Flexible(
-                      flex: 1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black,
-                              elevation: 0,
+                    flex: 15,
+                    child: Builder(builder: (context){
+                      if(snapshotData!["isUsing"]==true){
+                        return Column(
+                          children: [Container(
+                            height: 50,
+                            child: Row(
+                              children: [
+                                Text('입장료',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),),
+                                Spacer(flex: 1,),
+                                Text('X${snapshotData!["numberOfPeople"]}',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Spacer(flex: 1,),
+                                Text('${snapshotData!["numberOfPeople"] * 7000}원',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),),
+                              ],
+                            ),),
+                            DrawerBucket(
+                                subject: drawerListKor[0],
+                                howMany: snapshotData!["${drawerListEng[0]}"],
+                                cost: snapshotData!["${drawerListEng[0]}"]*priceList[0]),
+                            DrawerBucket(
+                                subject: '${drawerListKor[1]}',
+                                howMany: snapshotData!["${drawerListEng[1]}"],
+                                cost: snapshotData!["${drawerListEng[1]}"]*priceList[1]),
+                            DrawerBucket(
+                                subject: drawerListKor[2],
+                                howMany: snapshotData!["${drawerListEng[2]}"],
+                                cost: snapshotData!["${drawerListEng[2]}"]*priceList[2]),
+                            DrawerBucket(
+                                subject: drawerListKor[3],
+                                howMany: snapshotData!["${drawerListEng[3]}"],
+                                cost: snapshotData!["${drawerListEng[3]}"]*priceList[3]),
+                            DrawerBucket(
+                                subject: drawerListKor[4],
+                                howMany: snapshotData!["${drawerListEng[4]}"],
+                                cost: snapshotData!["${drawerListEng[4]}"]*priceList[4]),
+                            DrawerBucket(
+                                subject: drawerListKor[5],
+                                howMany: snapshotData!["${drawerListEng[5]}"],
+                                cost: snapshotData!["${drawerListEng[5]}"]*priceList[5]),
+                            DrawerBucket(
+                                subject: drawerListKor[6],
+                                howMany: snapshotData!["${drawerListEng[6]}"],
+                                cost: snapshotData!["${drawerListEng[6]}"]*priceList[6]),
+                            Container(
+                              height: 50,
+                              child: Row(
+                                children: [
+                                  Spacer(flex: 1,),
+                                  Text('총',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Spacer(flex: 1,),
+                                  Text('${snapshotData!["moneysum"]}원',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),),
+                                ],
+                              ),
                             ),
-                            onPressed: (){},
-                            child: Container(
-                              //height: double.maxFinite,
-                              decoration: BoxDecoration(
-                                //color: Colors.black,
-                              ),
-                              child: Text("주문하기",),
-                            )),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
-                                elevation: 0,
-                              ),
-                              onPressed: (){},
-                              child: Container(
-                               // height: double.maxFinite,
-                                child: Text("이동하기"),
-                              )),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
-                                elevation: 0,
-                              ),
-                              onPressed: () async{
-                                showDialog(
-                                    context: context,
-                                    builder: (context){
-                                      return AlertDialog(
-                                        title: Text("자리비움"),
-                                        content: Text("자리를 비우시겠습니까?"),
-                                        actions: [
-                                          TextButton(
-                                            child: const Text(
-                                              '취소',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
+                            Spacer(flex: 1,),
+                            Flexible(
+                                flex: 1,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                          elevation: 0,
+                                        ),
+                                        onPressed: (){},
+                                        child: Container(
+                                          //height: double.maxFinite,
+                                          decoration: BoxDecoration(
+                                            //color: Colors.black,
                                           ),
-                                          TextButton(
-                                            child: const Text(
-                                              '확인',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            onPressed: () async {
-                                                final tableInfo = TableInfo(
-                                                enteredAt: Timestamp.fromDate(DateTime.now()),
-                                                tableNum: snapshotData!["tableNum"],
-                                                numberOfPeople: 0,
-                                                yukhoe: 0,
-                                                jeyuk: 0, sundae: 0,
-                                                corncheese: 0,
-                                                nacho: 0,
-                                                eomooktang: 0,
-                                                hwangdo: 0,
-                                                moneysum: 0,
-                                                sexuallity: "none");
-                                                await FirebaseFirestore.instance
-                                                    .collection('table_id')
-                                                    .doc("table${snapshotData!["tableNum"]}")
-                                                    .update(tableInfo.toMap());
-                                                Navigator.of(context).pop();
-                                                context.go('/');
-                                                await tableStream(snapshotData!["tableNum"]);
-                                              }
-                                          ),
-                                        ],
-                                      );
-                                    });
-                              },
-                              child: Container(
-                                //height: double.maxFinite,
-                                child: Text("자리비움"),
-                              )),
-                        ],
-                      ))
+                                          child: Text("주문하기",),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                          elevation: 0,
+                                        ),
+                                        onPressed: (){},
+                                        child: Container(
+                                          // height: double.maxFinite,
+                                          child: Text("이동하기"),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                          elevation: 0,
+                                        ),
+                                        onPressed: () async{
+                                          showDialog(
+                                              context: context,
+                                              builder: (context){
+                                                return AlertDialog(
+                                                  title: Text("자리비움"),
+                                                  content: Text("자리를 비우시겠습니까?"),
+                                                  actions: [
+                                                    TextButton(
+                                                      child: const Text(
+                                                        '취소',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.of(context).pop();
+                                                      },
+                                                    ),
+                                                    TextButton(
+                                                        child: const Text(
+                                                          '확인',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                        onPressed: () async {
+                                                          final tableInfo = TableInfo(
+                                                              enteredAt: Timestamp.fromDate(DateTime.now()),
+                                                              tableNum: snapshotData!["tableNum"],
+                                                              numberOfPeople: 0,
+                                                              yukhoe: 0,
+                                                              jeyuk: 0, sundae: 0,
+                                                              corncheese: 0,
+                                                              nacho: 0,
+                                                              eomooktang: 0,
+                                                              hwangdo: 0,
+                                                              moneysum: 0,
+                                                              sexuallity: "none");
+                                                          await FirebaseFirestore.instance
+                                                              .collection('table_id')
+                                                              .doc("table${snapshotData!["tableNum"]}")
+                                                              .update(tableInfo.toMap());
+                                                          Navigator.of(context).pop();
+                                                          //context.go('/');
+                                                          setState(() {
+                                                            //_fetchedData = tableStream(snapshotData!["tableNum"]);
+                                                            //tableWidgetFetchedData = tableStream(snapshotData!["tableNum"]);
+                                                          });
+                                                        }
+                                                    ),
+                                                  ],
+                                                );
+                                              });
+                                        },
+                                        child: Container(
+                                          //height: double.maxFinite,
+                                          child: Text("자리비움"),
+                                        )),
+                                  ],
+                                ))],
+                        );
+                      }
+                      else{
+                        return Flexible(
+                            flex: 8,
+                            child: Text("빈 테이블"));
+                      }
+                    }),
+                  )
                 ],
               );
             }
@@ -317,13 +329,6 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
   //   return Provider.of<TableNum>(context).tableNum;
   // }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> _stream() async* {
-    DocumentSnapshot<Map<String, dynamic>> result = await FirebaseFirestore.instance
-        .collection('table_id')!
-        .doc('table${widget.numberedTable}')
-        .get();
-    yield result;
-  }
 }
 
 class DrawerBucket extends StatelessWidget {
