@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -419,6 +420,16 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                                 +_eomooktangval*priceList[5]
                                                                 +_hwangdoval*priceList[6]),
                                                           });
+                                                          await FirebaseAnalytics.instance.logEvent(
+                                                              name: 'orderedMenu',
+                                                              parameters: {'yukhoe': _yukhoeval,
+                                                                'jeyuk': _jeyukval,
+                                                                'sundae': _sundaeval,
+                                                                'corncheese': _corncheeseval,
+                                                                'nacho': _nachoval,
+                                                                'eomooktang': _eomooktangval,
+                                                                'hwangdo': _hwangdoval,
+                                                              });
                                                           setState(() {
                                                             _fetchedData=tableStream(snapshotData!["tableNum"]);
                                                             //super.initState();
