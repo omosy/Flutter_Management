@@ -11,6 +11,8 @@ class TableInfo {
   final int nacho;
   final int hwangdo;
   final int eomooktang;
+  final int juicecan;
+  final int bloodpack;
   final int moneysum;
   final String sexuallity;
   final bool isusing = false;
@@ -28,6 +30,8 @@ class TableInfo {
     required this.hwangdo,
     required this.moneysum,
     required this.sexuallity,
+    required this.juicecan,
+    required this.bloodpack,
   });
 
   factory TableInfo.fromMap(Map<String, dynamic> map) =>
@@ -43,7 +47,9 @@ class TableInfo {
         eomooktang: map["eomooktang"]!,
         hwangdo: map["hwangdo"]!,
         moneysum: map["moneysum"]!,
-        sexuallity: map["sexuallity"]!
+        sexuallity: map["sexuallity"]!,
+        juicecan: map["juicecan"]!,
+        bloodpack: map["bloodpack"]!,
       );
 
   Map<String, dynamic> toMap() => {
@@ -57,6 +63,8 @@ class TableInfo {
     "nacho": nacho,
     "eomooktang": eomooktang,
     "hwangdo": hwangdo,
+    "juicecan":juicecan,
+    "bloodpack":bloodpack,
     "moneysum" : moneysum,
     "sexuallity" : sexuallity,
     "isUsing" : isusing,

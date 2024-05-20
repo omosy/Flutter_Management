@@ -158,9 +158,9 @@ class _TableWidgetsState extends State<TableWidgets> {
                                       await FirebaseAnalytics.instance.logEvent(
                                           name: 'numberOfPeople',
                                           parameters: {'numberOfPeople': nopvalue,
-                                            'numberOfMale': sexualvalue==sexualList[0] ?nopvalue : null,
-                                            'numberOfFemale': sexualvalue==sexualList[1] ?nopvalue : null,
-                                            'numberOfTogether': sexualvalue==sexualList[3] ?nopvalue : null
+                                            'numberOfMale': sexualvalue==sexualList[0] ?nopvalue : 0,
+                                            'numberOfFemale': sexualvalue==sexualList[1] ?nopvalue : 0,
+                                            'numberOfTogether': sexualvalue==sexualList[3] ?nopvalue : 0
                                                       });
                                       setState(() {
                                         _tableWidgetFetchedData=tableStream(widget.tablenum);

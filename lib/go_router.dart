@@ -13,15 +13,15 @@ import 'firebase_options.dart';
 
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // Set landscape orientation
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   // for(int i = 1; i<40; i++) {
   //   final ref = FirebaseFirestore.instance.collection("table_id").doc(
   //       'table$i');
@@ -40,6 +40,8 @@ void main() async{
   //         hwangdo: 0,
   //         moneysum: 0,
   //         sexuallity: 'null',
+  //         juicecan: 0,
+  //         bloodpack: 0,
   //     );
   //     await ref.set(tableInfo.toMap());
   //   }// (초깃값 설정)
