@@ -8,7 +8,7 @@ import 'package:joojumflutter/table_provider.dart';
 import 'package:joojumflutter/table_to_db.dart';
 import 'package:provider/provider.dart';
 
-List<String> sexualList =["남자", "여자", "none"];
+List<String> sexualList =["남자", "여자", "none", "합석"];
 List<int> nopList = [0,1,2,3,4,5,6,7];
 
 class TableWidgets extends StatefulWidget {
@@ -53,10 +53,7 @@ class _TableWidgetsState extends State<TableWidgets> {
       builder: (context, snapshot) {
         if(snapshot.hasData){
           final ref = snapshot.data!.data();
-          final Timestamp timeStamped = ref!["enteredAt"];
-          final DateTime enteredAt = DateTime.fromMicrosecondsSinceEpoch(timeStamped.microsecondsSinceEpoch);
-          String enteredhhmm =
-          DateFormat('HH시 MM분').format(enteredAt);
+          //final Timestamp timeStamped = ref!["enteredAt"];
             return Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 3.0, horizontal: 1.5),
@@ -151,10 +148,11 @@ class _TableWidgetsState extends State<TableWidgets> {
                                           .collection('table_id')
                                           .doc("table${widget.tablenum}")
                                           .update({
+                                        "moneysum" : (sexualvalue==sexualList[3]) ?(0) :(nopvalue*7000),
                                         "sexuallity": sexualvalue,
                                         "numberOfPeople": nopvalue,
                                         "isUsing": true,
-                                        "enteredAt": Timestamp.fromDate(nowdate),
+                                        "enteredAt":DateFormat("H시 m분").format(DateTime.now()).toString(),
                                       });
                                       setState(() {
                                         _tableWidgetFetchedData=tableStream(widget.tablenum);
@@ -211,10 +209,13 @@ class _TableWidgetsState extends State<TableWidgets> {
                         child: Builder(
                           builder: (context) {
                             if (ref!["isUsing"] == true) {
+                              //final DateTime enteredAt = DateTime.fromMicrosecondsSinceEpoch(timeStamped.microsecondsSinceEpoch);
+                              //String enteredhhmm =
+                              //DateFormat('HH시 MM분').format(enteredAt);
                               return Column(
                                 children: [
                                   Text(
-                                    "입장: ${enteredhhmm}",
+                                    "입장: ${ref!["enteredAt"]}",
                                     style: TextStyle(color: Colors.black),
                                   ),
                                   Text(

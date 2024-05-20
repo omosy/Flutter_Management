@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:joojumflutter/appbar.dart';
 import 'package:joojumflutter/main.dart';
 import 'package:joojumflutter/movetheBlue.dart';
@@ -79,6 +80,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
   late int _nachoval;
   late int _eomooktangval;
   late int _hwangdoval;
+  late int _moneysumval;
   //Stream<DocumentSnapshot<Map<String, dynamic>>>? _streamData;
 
 
@@ -94,6 +96,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
     _nachoval = 0;
     _eomooktangval = 0;
     _hwangdoval = 0;
+    _moneysumval = 0;
   }
 
   @override
@@ -230,6 +233,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                           _nachoval=snapshotData!["${drawerListEng[4]}"];
                                           _eomooktangval=snapshotData!["${drawerListEng[5]}"];
                                           _hwangdoval=snapshotData!["${drawerListEng[6]}"];
+                                          _moneysumval = snapshotData!["moneysum"];
                                         });
                                         setState(() {
                                           _orderMode = true;
@@ -407,6 +411,13 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                             "nacho": _nachoval,
                                                             "eomooktang":_eomooktangval,
                                                             "hwangdo":_hwangdoval,
+                                                            "moneysum": _moneysumval+(_yukhoeval*priceList[0]
+                                                                +_jeyukval*priceList[1]
+                                                                +_sundaeval*priceList[2]
+                                                                +_corncheeseval*priceList[3]
+                                                                +_nachoval*priceList[4]
+                                                                +_eomooktangval*priceList[5]
+                                                                +_hwangdoval*priceList[6]),
                                                           });
                                                           setState(() {
                                                             _fetchedData=tableStream(snapshotData!["tableNum"]);
@@ -431,20 +442,20 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                         child: Text("주문하기",),
                                       )),
                                 ),
-                                Flexible(
-                                  flex: 1,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        fixedSize: const Size(double.maxFinite, double.maxFinite),
-                                        backgroundColor: Colors.black,
-                                        elevation: 0,
-                                      ),
-                                      onPressed: (){},
-                                      child: Container(
-                                        // height: double.maxFinite,
-                                        child: Text("이동하기"),
-                                      )),
-                                ),
+                                // Flexible(
+                                //   flex: 1,
+                                //   child: ElevatedButton(
+                                //       style: ElevatedButton.styleFrom(
+                                //         fixedSize: const Size(double.maxFinite, double.maxFinite),
+                                //         backgroundColor: Colors.black,
+                                //         elevation: 0,
+                                //       ),
+                                //       onPressed: (){},
+                                //       child: Container(
+                                //         // height: double.maxFinite,
+                                //         child: Text("이동하기"),
+                                //       )),
+                                // ),
                                 Flexible(
                                   flex: 1,
                                   child: ElevatedButton(
@@ -481,7 +492,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                       ),
                                                       onPressed: () async {
                                                         final tableInfo = TableInfo(
-                                                            enteredAt: Timestamp.fromDate(DateTime.now()),
+                                                            enteredAt: DateFormat.HOUR24_MINUTE,
                                                             tableNum: snapshotData!["tableNum"],
                                                             numberOfPeople: 0,
                                                             yukhoe: 0,
@@ -499,7 +510,12 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                         setState(() {
                                                           tableStream(snapshotData!["tableNum"]);
                                                           Navigator.of(context).pop();
-                                                          context.go('/');
+                                                          //context.go('/');
+                                                          Navigator.push(context,
+                                                              MaterialPageRoute(builder: (context) =>POSHome(title: "joojum")))
+                                                              .then((value) {
+                                                            setState(() {});
+                                                          });
                                                           moveTableNum(context, snapshotData!["tableNum"]);
                                                           //_fetchedData = tableStream(snapshotData!["tableNum"]);
                                                           //tableWidgetFetchedData = tableStream(snapshotData!["tableNum"]);

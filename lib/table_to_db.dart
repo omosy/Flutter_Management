@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TableInfo {
-  final Timestamp enteredAt;
+  final String enteredAt;
   final int tableNum;
   final int numberOfPeople;
   final int yukhoe;

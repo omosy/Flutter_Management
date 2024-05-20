@@ -8,11 +8,16 @@ import 'package:joojumflutter/streams.dart';
 import 'package:joojumflutter/table_drawer.dart';
 import 'package:joojumflutter/table_to_db.dart';
 import 'package:joojumflutter/workers_page.dart';
-
+import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 
 
 void main() async{
+  // Set landscape orientation
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -20,24 +25,24 @@ void main() async{
   // for(int i = 1; i<40; i++) {
   //   final ref = FirebaseFirestore.instance.collection("table_id").doc(
   //       'table$i');
-    //final createdAt = DateTime.now();
-    //String formatDate = DateFormat('yyyy년 MM월 dd일 H시 mm분 ss초').format(createdAt);
-    //   final tableInfo = TableInfo(
-    //       enteredAt: DateTime.now(),
-    //       tableNum: i,
-    //       numberOfPeople: 0,
-    //       yukhoe: 0,
-    //       jeyuk: 0,
-    //       sundae: 0,
-    //       corncheese: 0,
-    //       nacho: 0,
-    //       eomooktang: 0,
-    //       hwangdo: 0,
-    //       moneysum: 0,
-    //       sexuallity: 'null',
-    //   );
-    //   await ref.set(tableInfo.toMap());
-    // }// (초깃값 설정)
+  //   final createdAt = DateTime.now();
+  //   //String formatDate = DateFormat('yyyy년 MM월 dd일 H시 mm분 ss초').format(createdAt);
+  //     final tableInfo = TableInfo(
+  //         enteredAt: "",
+  //         tableNum: i,
+  //         numberOfPeople: 0,
+  //         yukhoe: 0,
+  //         jeyuk: 0,
+  //         sundae: 0,
+  //         corncheese: 0,
+  //         nacho: 0,
+  //         eomooktang: 0,
+  //         hwangdo: 0,
+  //         moneysum: 0,
+  //         sexuallity: 'null',
+  //     );
+  //     await ref.set(tableInfo.toMap());
+  //   }// (초깃값 설정)
   for(int i = 1;i<40;i++){
     tableStream(i);}
   runApp(const RouterApp());
@@ -83,6 +88,7 @@ class RouterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       //routeInformationParser: _router.routeInformationParser,
       //routeInformationProvider: _router.routeInformationProvider,
       //routerDelegate: _router.routerDelegate,
