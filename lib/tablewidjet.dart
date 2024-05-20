@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -154,6 +155,13 @@ class _TableWidgetsState extends State<TableWidgets> {
                                         "isUsing": true,
                                         "enteredAt":DateFormat("H시 m분").format(DateTime.now()).toString(),
                                       });
+                                      await FirebaseAnalytics.instance.logEvent(
+                                          name: 'numberOfPeople',
+                                          parameters: {'numberOfPeople': nopvalue,
+                                            'numberOfMale': sexualvalue==sexualList[0] ?nopvalue : null,
+                                            'numberOfFemale': sexualvalue==sexualList[1] ?nopvalue : null,
+                                            'numberOfTogether': sexualvalue==sexualList[3] ?nopvalue : null
+                                                      });
                                       setState(() {
                                         _tableWidgetFetchedData=tableStream(widget.tablenum);
                                         //super.initState();
