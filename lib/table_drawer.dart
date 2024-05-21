@@ -22,7 +22,8 @@ List<String> drawerListKor= [
   '어묵탕',
   '황도',
   '뚱캔',
-  '혈액팩'
+  '혈액팩',
+  '물',
 ];
 
 List<String> drawerListEng= [
@@ -34,19 +35,21 @@ List<String> drawerListEng= [
   'eomooktang',
   'hwangdo',
   'juicecan',
-  'bloodpack'
+  'bloodpack',
+  'water',
 ];
 
 List<int> priceList=[
   12000,
   10000,
-  10000,
+  9000,
   7000,
   7000,
   7000,
   7000,
   2000,
   3000,
+  1000,
 ];
 
 class TableDrawerScaffold extends StatelessWidget {
@@ -90,6 +93,8 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
   late int _moneysumval;
   late int _juicecanval;
   late int _bloodpackval;
+  late int _waterval;
+  late String _gotservice;
   //Stream<DocumentSnapshot<Map<String, dynamic>>>? _streamData;
 
 
@@ -108,6 +113,8 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
     _moneysumval = 0;
     _juicecanval = 0;
     _bloodpackval = 0;
+    _waterval = 1;
+    _gotservice = "아직";
   }
 
   @override
@@ -144,7 +151,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                           SizedBox(
                             height: 40,
                             child: Text(
-                              "${snapshotData!["tableNum"]}번 테이블 (${snapshotData!["numberOfPeople"]}명)",
+                              "${snapshotData!["tableNum"]}번 테이블 (${snapshotData!["numberOfPeople"]}명) (서비스:${snapshotData!["gotservice"]})",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
@@ -211,6 +218,10 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                               subject: drawerListKor[8],
                               howMany: snapshotData!["${drawerListEng[8]}"],
                               cost: priceList[8]),
+                          WaterDrawerBucket(
+                              subject: drawerListKor[9],
+                              howMany: snapshotData!["${drawerListEng[9]}"],
+                              cost: priceList[9]),
                           Container(
                             height: 50,
                             child: Row(
@@ -256,6 +267,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                           _hwangdoval=snapshotData!["${drawerListEng[6]}"];
                                           _juicecanval=snapshotData!["${drawerListEng[7]}"];
                                           _bloodpackval=snapshotData!["${drawerListEng[8]}"];
+                                          _waterval = snapshotData!["${drawerListEng[9]}"];
                                           _moneysumval = snapshotData!["moneysum"];
                                         });
                                         setState(() {
@@ -265,180 +277,220 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                               builder: (context) {
                                                 return AlertDialog(
                                                   title: Text("주문하기"),
-                                                  content: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text("육회: "),
-                                                          DropdownButton(
-                                                            //isExpanded: true,
-                                                              value: _yukhoeval,
-                                                              items: [0,1,2,3,4]
-                                                                  .map((value) => DropdownMenuItem(
-                                                                value: value,
-                                                                child: Text("$value"),
-                                                              ))
-                                                                  .toList(),
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _yukhoeval = value!;
-                                                                });
-                                                              }),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text("제육: "),
-                                                          DropdownButton(
-                                                            //isExpanded: true,
-                                                              value: _jeyukval,
-                                                              items: [0,1,2,3,4]
-                                                                  .map((value) => DropdownMenuItem(
-                                                                value: value,
-                                                                child: Text('$value'),
-                                                              ))
-                                                                  .toList(),
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _jeyukval = _jeyukval+value!;
-                                                                });
-                                                              }),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text("순대: "),
-                                                          DropdownButton(
-                                                            //isExpanded: true,
-                                                              value: _sundaeval,
-                                                              items: [0,1,2,3,4]
-                                                                  .map((value) => DropdownMenuItem(
-                                                                value: value,
-                                                                child: Text("$value"),
-                                                              ))
-                                                                  .toList(),
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _sundaeval += value!;
-                                                                });
-                                                              }),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text("콘치즈: "),
-                                                          DropdownButton(
-                                                            //isExpanded: true,
-                                                              value: _corncheeseval,
-                                                              items: [0,1,2,3,4]
-                                                                  .map((value) => DropdownMenuItem(
-                                                                value: value,
-                                                                child: Text('$value'),
-                                                              ))
-                                                                  .toList(),
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _corncheeseval += value!;
-                                                                });
-                                                              }),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text("나초: "),
-                                                          DropdownButton(
-                                                            //isExpanded: true,
-                                                              value: _nachoval,
-                                                              items: [0,1,2,3,4]
-                                                                  .map((value) => DropdownMenuItem(
-                                                                value: value,
-                                                                child: Text("$value"),
-                                                              ))
-                                                                  .toList(),
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _nachoval += value!;
-                                                                });
-                                                              }),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text("어묵탕: "),
-                                                          DropdownButton(
-                                                            //isExpanded: true,
-                                                              value: _eomooktangval,
-                                                              items: [0,1,2,3,4]
-                                                                  .map((value) => DropdownMenuItem(
-                                                                value: value,
-                                                                child: Text('$value'),
-                                                              ))
-                                                                  .toList(),
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _eomooktangval += value!;
-                                                                });
-                                                              }),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text("황도: "),
-                                                          DropdownButton(
-                                                            //isExpanded: true,
-                                                              value: _hwangdoval,
-                                                              items: [0,1,2,3,4]
-                                                                  .map((value) => DropdownMenuItem(
-                                                                value: value,
-                                                                child: Text('$value'),
-                                                              ))
-                                                                  .toList(),
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _hwangdoval += value!;
-                                                                });
-                                                              }),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text("뚱캔: "),
-                                                          DropdownButton(
-                                                            //isExpanded: true,
-                                                              value: _juicecanval,
-                                                              items: [0,1,2,3,4]
-                                                                  .map((value) => DropdownMenuItem(
-                                                                value: value,
-                                                                child: Text('$value'),
-                                                              ))
-                                                                  .toList(),
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _juicecanval += value!;
-                                                                });
-                                                              }),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text("혈액팩: "),
-                                                          DropdownButton(
-                                                            //isExpanded: true,
-                                                              value: _bloodpackval,
-                                                              items: [0,1,2,3,4]
-                                                                  .map((value) => DropdownMenuItem(
-                                                                value: value,
-                                                                child: Text('$value'),
-                                                              ))
-                                                                  .toList(),
-                                                              onChanged: (value) {
-                                                                setState(() {
-                                                                  _bloodpackval += value!;
-                                                                });
-                                                              }),
-                                                        ],
-                                                      ),
-                                                    ],
+                                                  content: SingleChildScrollView(
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Text("육회: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _yukhoeval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text("$value"),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _yukhoeval = value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("제육: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _jeyukval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text('$value'),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _jeyukval = _jeyukval+value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("순대: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _sundaeval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text("$value"),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _sundaeval += value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("콘치즈: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _corncheeseval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text('$value'),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _corncheeseval += value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("나초: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _nachoval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text("$value"),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _nachoval += value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("어묵탕: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _eomooktangval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text('$value'),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _eomooktangval += value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("황도: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _hwangdoval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text('$value'),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _hwangdoval += value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("뚱캔: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _juicecanval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text('$value'),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _juicecanval += value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("혈액팩: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _bloodpackval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text('$value'),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _bloodpackval += value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("물: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _waterval,
+                                                                items: [0,1,2,3,4]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text('$value'),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    _waterval += value!;
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("서비스: "),
+                                                            DropdownButton(
+                                                              //isExpanded: true,
+                                                                value: _gotservice,
+                                                                items: ["아직","받음"]
+                                                                    .map((value) => DropdownMenuItem(
+                                                                  value: value,
+                                                                  child: Text('$value'),
+                                                                ))
+                                                                    .toList(),
+                                                                onChanged: (value) {
+                                                                  setState(() {
+                                                                    (_gotservice = value!);
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                   actions: [
                                                     TextButton(
@@ -474,6 +526,8 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                             "hwangdo":_hwangdoval,
                                                             "juicecan":_juicecanval,
                                                             "bloodpack":_bloodpackval,
+                                                            "gotservice":_gotservice,
+                                                            "water": _waterval,
                                                             "moneysum": _moneysumval+(_yukhoeval*priceList[0]
                                                                 +_jeyukval*priceList[1]
                                                                 +_sundaeval*priceList[2]
@@ -482,7 +536,8 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                                 +_eomooktangval*priceList[5]
                                                                 +_hwangdoval*priceList[6]
                                                                 +_juicecanval*priceList[7]
-                                                                +_bloodpackval*priceList[8]),
+                                                                +_bloodpackval*priceList[8]
+                                                                +(_waterval-1)*priceList[9]),
                                                           });
                                                           await FirebaseAnalytics.instance.logEvent(
                                                               name: 'orderedMenu',
@@ -495,6 +550,7 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                                 'hwangdo': _hwangdoval,
                                                                 'juicecan': _juicecanval,
                                                                 'bloodpack': _bloodpackval,
+                                                                'water' : _waterval,
                                                               });
                                                           setState(() {
                                                             _fetchedData=tableStream(snapshotData!["tableNum"]);
@@ -581,7 +637,9 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                             moneysum: 0,
                                                             juicecan: 0,
                                                             bloodpack: 0,
-                                                            sexuallity: "none");
+                                                            sexuallity: "none",
+                                                            water: 1,
+                                                            gotservice: "");
                                                         await FirebaseFirestore.instance
                                                             .collection('table_id')
                                                             .doc("table${snapshotData!["tableNum"]}")
@@ -692,6 +750,50 @@ class DrawerBucket extends StatelessWidget {
           ),
           //Spacer(flex: 1,),
           Text('${howMany * cost}원',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),),
+        ],
+      ),
+    );
+  }
+}
+
+class WaterDrawerBucket extends StatelessWidget {
+  final String subject;
+  final int howMany;
+  final int cost;
+  const WaterDrawerBucket({
+    super.key,
+    required this.subject,
+    required this.howMany,
+    required this.cost,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Text('$subject',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),),
+          ),
+          //Spacer(flex: 1,),
+          Text('X$howMany',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          //Spacer(flex: 1,),
+          Text('${(howMany-1) * cost}원',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,

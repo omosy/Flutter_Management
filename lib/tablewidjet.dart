@@ -198,7 +198,7 @@ class _TableWidgetsState extends State<TableWidgets> {
                                 "테이블${widget.tablenum}",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 13,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -224,23 +224,30 @@ class _TableWidgetsState extends State<TableWidgets> {
                                 children: [
                                   Text(
                                     "입장: ${ref!["enteredAt"]}",
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 9),
                                   ),
                                   Text(
                                     "인원수: ${ref!["numberOfPeople"]}명",
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 9),
                                   ),
                                   Text(
                                     "성별: ${ref!["sexuallity"]}",
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 9),
                                   ),
                                 ],
                               );
                             } else {
-                              return Text(
+                              return const Text(
                                 "빈 테이블",
                                 style: TextStyle(
                                   color: Colors.black38,
+                                  fontSize: 9,
                                 ),
                               );
                             }

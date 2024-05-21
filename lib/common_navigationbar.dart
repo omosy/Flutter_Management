@@ -10,7 +10,7 @@ class RouterNavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.08 * MediaQuery.of(context).size.height,
+      height: 0.05 * MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(

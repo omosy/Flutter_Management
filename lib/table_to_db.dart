@@ -13,6 +13,8 @@ class TableInfo {
   final int eomooktang;
   final int juicecan;
   final int bloodpack;
+  final int water;
+  final String gotservice;
   final int moneysum;
   final String sexuallity;
   final bool isusing = false;
@@ -28,6 +30,8 @@ class TableInfo {
     required this.nacho,
     required this.eomooktang,
     required this.hwangdo,
+    required this.water,
+    required this.gotservice,
     required this.moneysum,
     required this.sexuallity,
     required this.juicecan,
@@ -50,6 +54,8 @@ class TableInfo {
         sexuallity: map["sexuallity"]!,
         juicecan: map["juicecan"]!,
         bloodpack: map["bloodpack"]!,
+        water: map["water"]!,
+        gotservice: map["gotservice"]!,
       );
 
   Map<String, dynamic> toMap() => {
@@ -66,6 +72,8 @@ class TableInfo {
     "juicecan":juicecan,
     "bloodpack":bloodpack,
     "moneysum" : moneysum,
+    "water": water,
+    "gotservice": gotservice,
     "sexuallity" : sexuallity,
     "isUsing" : isusing,
   };

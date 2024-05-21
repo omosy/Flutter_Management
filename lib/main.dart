@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:custom_error/custom_error.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -67,6 +68,7 @@ class _POSHomeState extends State<POSHome> {
                 body: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    SizedBox(height: 0.05 * MediaQuery.of(context).size.height,),
                     //Spacer(flex: 1,),
                     Flexible(
                       flex: 2,

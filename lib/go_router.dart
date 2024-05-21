@@ -42,6 +42,8 @@ void main() async{
   //         sexuallity: 'null',
   //         juicecan: 0,
   //         bloodpack: 0,
+  //         water: 0,
+  //         gotservice: "",
   //     );
   //     await ref.set(tableInfo.toMap());
   //   }// (초깃값 설정)
