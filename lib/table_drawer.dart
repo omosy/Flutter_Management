@@ -38,14 +38,14 @@ List<String> drawerListEng= [
 ];
 
 List<int> priceList=[
-  9900,
+  12000,
   10000,
   10000,
   7000,
-  5000,
   7000,
   7000,
-  3000,
+  7000,
+  2000,
   3000,
 ];
 
@@ -125,319 +125,429 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
       ),
       //color: Colors.pink,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: StreamBuilder(
           stream: _fetchedData,
           builder: (context, snapshot) {
             if (snapshot.hasData){
               Map<String,dynamic>? snapshotData = snapshot.data!.data();
               return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Spacer(flex: 1,),
-                  Flexible(
-                    flex: 1,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                  SizedBox(width:MediaQuery.of(context).size.width * 0.25,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: 40,
+                            child: Text(
+                              "${snapshotData!["tableNum"]}번 테이블 (${snapshotData!["numberOfPeople"]}명)",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),),
+                          ),
+                          const SizedBox(height: 20,),
                         SizedBox(
                           height: 40,
-                          child: Text(
-                            "${snapshotData!["tableNum"]}번 테이블 (${snapshotData!["numberOfPeople"]}명)",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),),
-                        ),
-                        const SizedBox(height: 20,),
-                      Container(
-                        height: 40,
-                        child: Row(
-                          children: [
-                            Text('입장료',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),),
-                            Spacer(flex:1),
-                            Text('X${snapshotData!["numberOfPeople"]}',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Spacer(flex:1),
-                            Text('${snapshotData!["numberOfPeople"] * 7000}원',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),),
-                          ],
-                        ),),
-                        DrawerBucket(
-                            subject: drawerListKor[0],
-                            howMany: snapshotData!["${drawerListEng[0]}"],
-                            cost: priceList[0]),
-                        DrawerBucket(
-                            subject: '${drawerListKor[1]}',
-                            howMany: snapshotData!["${drawerListEng[1]}"],
-                            cost: priceList[1]),
-                        DrawerBucket(
-                            subject: drawerListKor[2],
-                            howMany: snapshotData!["${drawerListEng[2]}"],
-                            cost: priceList[2]),
-                        DrawerBucket(
-                            subject: drawerListKor[3],
-                            howMany: snapshotData!["${drawerListEng[3]}"],
-                            cost: 7000),
-                        DrawerBucket(
-                            subject: drawerListKor[4],
-                            howMany: snapshotData!["${drawerListEng[4]}"],
-                            cost: priceList[4]),
-                        DrawerBucket(
-                            subject: drawerListKor[5],
-                            howMany: snapshotData!["${drawerListEng[5]}"],
-                            cost: priceList[5]),
-                        DrawerBucket(
-                            subject: drawerListKor[6],
-                            howMany: snapshotData!["${drawerListEng[6]}"],
-                            cost: priceList[6]),
-                        DrawerBucket(
-                            subject: drawerListKor[7],
-                            howMany: snapshotData!["${drawerListEng[7]}"],
-                            cost: priceList[7]),
-                        DrawerBucket(
-                            subject: drawerListKor[8],
-                            howMany: snapshotData!["${drawerListEng[8]}"],
-                            cost: priceList[8]),
-                        Container(
-                          height: 50,
                           child: Row(
                             children: [
-                              Spacer(flex: 1,),
-                              Text('총',
+                              Text('입장료',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                ),),
+                              Spacer(flex:1),
+                              Text('X${snapshotData!["numberOfPeople"]}',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              Spacer(flex: 1,),
-                              Text('${snapshotData!["moneysum"]}원',
+                              Spacer(flex:1),
+                              Text('${snapshotData!["numberOfPeople"] * 7000}원',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
                                 ),),
                             ],
+                          ),),
+                          DrawerBucket(
+                              subject: drawerListKor[0],
+                              howMany: snapshotData!["${drawerListEng[0]}"],
+                              cost: priceList[0]),
+                          DrawerBucket(
+                              subject: '${drawerListKor[1]}',
+                              howMany: snapshotData!["${drawerListEng[1]}"],
+                              cost: priceList[1]),
+                          DrawerBucket(
+                              subject: drawerListKor[2],
+                              howMany: snapshotData!["${drawerListEng[2]}"],
+                              cost: priceList[2]),
+                          DrawerBucket(
+                              subject: drawerListKor[3],
+                              howMany: snapshotData!["${drawerListEng[3]}"],
+                              cost: 7000),
+                          DrawerBucket(
+                              subject: drawerListKor[4],
+                              howMany: snapshotData!["${drawerListEng[4]}"],
+                              cost: priceList[4]),
+                          DrawerBucket(
+                              subject: drawerListKor[5],
+                              howMany: snapshotData!["${drawerListEng[5]}"],
+                              cost: priceList[5]),
+                          DrawerBucket(
+                              subject: drawerListKor[6],
+                              howMany: snapshotData!["${drawerListEng[6]}"],
+                              cost: priceList[6]),
+                          DrawerBucket(
+                              subject: drawerListKor[7],
+                              howMany: snapshotData!["${drawerListEng[7]}"],
+                              cost: priceList[7]),
+                          DrawerBucket(
+                              subject: drawerListKor[8],
+                              howMany: snapshotData!["${drawerListEng[8]}"],
+                              cost: priceList[8]),
+                          Container(
+                            height: 50,
+                            child: Row(
+                              children: [
+                                Spacer(flex: 1,),
+                                Text('총',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Spacer(flex: 1,),
+                                Text('${snapshotData!["moneysum"]}원',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),),
+                              ],
+                            ),
                           ),
-                        ),
-                        const Spacer(flex: 1,),
-                        SizedBox(
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                flex: 1,
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      fixedSize: const Size(double.maxFinite, double.maxFinite),
-                                      backgroundColor: Colors.black,
-                                      elevation: 0,
-                                    ),
-                                    onPressed: (){
-                                      setState(() {
-                                        _yukhoeval=snapshotData!["${drawerListEng[0]}"];
-                                        _jeyukval=snapshotData!["${drawerListEng[1]}"];
-                                        _sundaeval=snapshotData!["${drawerListEng[2]}"];
-                                        _corncheeseval=snapshotData!["${drawerListEng[3]}"];
-                                        _nachoval=snapshotData!["${drawerListEng[4]}"];
-                                        _eomooktangval=snapshotData!["${drawerListEng[5]}"];
-                                        _hwangdoval=snapshotData!["${drawerListEng[6]}"];
-                                        _juicecanval=snapshotData!["${drawerListEng[7]}"];
-                                        _bloodpackval=snapshotData!["${drawerListEng[8]}"];
-                                        _moneysumval = snapshotData!["moneysum"];
-                                      });
-                                      setState(() {
-                                        _orderMode = true;
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                title: Text("주문하기"),
-                                                content: Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Text("육회: "),
-                                                        DropdownButton(
-                                                          //isExpanded: true,
-                                                            value: _yukhoeval,
-                                                            items: [0,1,2,3,4]
-                                                                .map((value) => DropdownMenuItem(
-                                                              value: value,
-                                                              child: Text("$value"),
-                                                            ))
-                                                                .toList(),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                _yukhoeval = value!;
-                                                              });
-                                                            }),
-                                                      ],
+                          const SizedBox(height: 30,),
+                          SizedBox(
+                            height: 50,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        fixedSize: const Size(double.maxFinite, double.maxFinite),
+                                        backgroundColor: Colors.black,
+                                        elevation: 0,
+                                      ),
+                                      onPressed: (){
+                                        setState(() {
+                                          _yukhoeval=snapshotData!["${drawerListEng[0]}"];
+                                          _jeyukval=snapshotData!["${drawerListEng[1]}"];
+                                          _sundaeval=snapshotData!["${drawerListEng[2]}"];
+                                          _corncheeseval=snapshotData!["${drawerListEng[3]}"];
+                                          _nachoval=snapshotData!["${drawerListEng[4]}"];
+                                          _eomooktangval=snapshotData!["${drawerListEng[5]}"];
+                                          _hwangdoval=snapshotData!["${drawerListEng[6]}"];
+                                          _juicecanval=snapshotData!["${drawerListEng[7]}"];
+                                          _bloodpackval=snapshotData!["${drawerListEng[8]}"];
+                                          _moneysumval = snapshotData!["moneysum"];
+                                        });
+                                        setState(() {
+                                          _orderMode = true;
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: Text("주문하기"),
+                                                  content: Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text("육회: "),
+                                                          DropdownButton(
+                                                            //isExpanded: true,
+                                                              value: _yukhoeval,
+                                                              items: [0,1,2,3,4]
+                                                                  .map((value) => DropdownMenuItem(
+                                                                value: value,
+                                                                child: Text("$value"),
+                                                              ))
+                                                                  .toList(),
+                                                              onChanged: (value) {
+                                                                setState(() {
+                                                                  _yukhoeval = value!;
+                                                                });
+                                                              }),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text("제육: "),
+                                                          DropdownButton(
+                                                            //isExpanded: true,
+                                                              value: _jeyukval,
+                                                              items: [0,1,2,3,4]
+                                                                  .map((value) => DropdownMenuItem(
+                                                                value: value,
+                                                                child: Text('$value'),
+                                                              ))
+                                                                  .toList(),
+                                                              onChanged: (value) {
+                                                                setState(() {
+                                                                  _jeyukval = _jeyukval+value!;
+                                                                });
+                                                              }),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text("순대: "),
+                                                          DropdownButton(
+                                                            //isExpanded: true,
+                                                              value: _sundaeval,
+                                                              items: [0,1,2,3,4]
+                                                                  .map((value) => DropdownMenuItem(
+                                                                value: value,
+                                                                child: Text("$value"),
+                                                              ))
+                                                                  .toList(),
+                                                              onChanged: (value) {
+                                                                setState(() {
+                                                                  _sundaeval += value!;
+                                                                });
+                                                              }),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text("콘치즈: "),
+                                                          DropdownButton(
+                                                            //isExpanded: true,
+                                                              value: _corncheeseval,
+                                                              items: [0,1,2,3,4]
+                                                                  .map((value) => DropdownMenuItem(
+                                                                value: value,
+                                                                child: Text('$value'),
+                                                              ))
+                                                                  .toList(),
+                                                              onChanged: (value) {
+                                                                setState(() {
+                                                                  _corncheeseval += value!;
+                                                                });
+                                                              }),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text("나초: "),
+                                                          DropdownButton(
+                                                            //isExpanded: true,
+                                                              value: _nachoval,
+                                                              items: [0,1,2,3,4]
+                                                                  .map((value) => DropdownMenuItem(
+                                                                value: value,
+                                                                child: Text("$value"),
+                                                              ))
+                                                                  .toList(),
+                                                              onChanged: (value) {
+                                                                setState(() {
+                                                                  _nachoval += value!;
+                                                                });
+                                                              }),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text("어묵탕: "),
+                                                          DropdownButton(
+                                                            //isExpanded: true,
+                                                              value: _eomooktangval,
+                                                              items: [0,1,2,3,4]
+                                                                  .map((value) => DropdownMenuItem(
+                                                                value: value,
+                                                                child: Text('$value'),
+                                                              ))
+                                                                  .toList(),
+                                                              onChanged: (value) {
+                                                                setState(() {
+                                                                  _eomooktangval += value!;
+                                                                });
+                                                              }),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text("황도: "),
+                                                          DropdownButton(
+                                                            //isExpanded: true,
+                                                              value: _hwangdoval,
+                                                              items: [0,1,2,3,4]
+                                                                  .map((value) => DropdownMenuItem(
+                                                                value: value,
+                                                                child: Text('$value'),
+                                                              ))
+                                                                  .toList(),
+                                                              onChanged: (value) {
+                                                                setState(() {
+                                                                  _hwangdoval += value!;
+                                                                });
+                                                              }),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text("뚱캔: "),
+                                                          DropdownButton(
+                                                            //isExpanded: true,
+                                                              value: _juicecanval,
+                                                              items: [0,1,2,3,4]
+                                                                  .map((value) => DropdownMenuItem(
+                                                                value: value,
+                                                                child: Text('$value'),
+                                                              ))
+                                                                  .toList(),
+                                                              onChanged: (value) {
+                                                                setState(() {
+                                                                  _juicecanval += value!;
+                                                                });
+                                                              }),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text("혈액팩: "),
+                                                          DropdownButton(
+                                                            //isExpanded: true,
+                                                              value: _bloodpackval,
+                                                              items: [0,1,2,3,4]
+                                                                  .map((value) => DropdownMenuItem(
+                                                                value: value,
+                                                                child: Text('$value'),
+                                                              ))
+                                                                  .toList(),
+                                                              onChanged: (value) {
+                                                                setState(() {
+                                                                  _bloodpackval += value!;
+                                                                });
+                                                              }),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  actions: [
+                                                    TextButton(
+                                                      child: const Text(
+                                                        '취소',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.of(context).pop();
+                                                      },
                                                     ),
-                                                    Row(
-                                                      children: [
-                                                        Text("제육: "),
-                                                        DropdownButton(
-                                                          //isExpanded: true,
-                                                            value: _jeyukval,
-                                                            items: [0,1,2,3,4]
-                                                                .map((value) => DropdownMenuItem(
-                                                              value: value,
-                                                              child: Text('$value'),
-                                                            ))
-                                                                .toList(),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                _jeyukval = _jeyukval+value!;
+                                                    TextButton(
+                                                      child: const Text(
+                                                        '확인',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      onPressed: () async {
+                                                        {
+                                                          await FirebaseFirestore.instance
+                                                              .collection('table_id')
+                                                              .doc("table${snapshotData!["tableNum"]}")
+                                                              .update({
+                                                            "yukhoe": _yukhoeval,
+                                                            "jeyuk": _jeyukval,
+                                                            "sundae": _sundaeval,
+                                                            "corncheese": _corncheeseval,
+                                                            "nacho": _nachoval,
+                                                            "eomooktang":_eomooktangval,
+                                                            "hwangdo":_hwangdoval,
+                                                            "juicecan":_juicecanval,
+                                                            "bloodpack":_bloodpackval,
+                                                            "moneysum": _moneysumval+(_yukhoeval*priceList[0]
+                                                                +_jeyukval*priceList[1]
+                                                                +_sundaeval*priceList[2]
+                                                                +_corncheeseval*priceList[3]
+                                                                +_nachoval*priceList[4]
+                                                                +_eomooktangval*priceList[5]
+                                                                +_hwangdoval*priceList[6]
+                                                                +_juicecanval*priceList[7]
+                                                                +_bloodpackval*priceList[8]),
+                                                          });
+                                                          await FirebaseAnalytics.instance.logEvent(
+                                                              name: 'orderedMenu',
+                                                              parameters: {'yukhoe': _yukhoeval,
+                                                                'jeyuk': _jeyukval,
+                                                                'sundae': _sundaeval,
+                                                                'corncheese': _corncheeseval,
+                                                                'nacho': _nachoval,
+                                                                'eomooktang': _eomooktangval,
+                                                                'hwangdo': _hwangdoval,
+                                                                'juicecan': _juicecanval,
+                                                                'bloodpack': _bloodpackval,
                                                               });
-                                                            }),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text("순대: "),
-                                                        DropdownButton(
-                                                          //isExpanded: true,
-                                                            value: _sundaeval,
-                                                            items: [0,1,2,3,4]
-                                                                .map((value) => DropdownMenuItem(
-                                                              value: value,
-                                                              child: Text("$value"),
-                                                            ))
-                                                                .toList(),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                _sundaeval += value!;
-                                                              });
-                                                            }),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text("콘치즈: "),
-                                                        DropdownButton(
-                                                          //isExpanded: true,
-                                                            value: _corncheeseval,
-                                                            items: [0,1,2,3,4]
-                                                                .map((value) => DropdownMenuItem(
-                                                              value: value,
-                                                              child: Text('$value'),
-                                                            ))
-                                                                .toList(),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                _corncheeseval += value!;
-                                                              });
-                                                            }),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text("나초: "),
-                                                        DropdownButton(
-                                                          //isExpanded: true,
-                                                            value: _nachoval,
-                                                            items: [0,1,2,3,4]
-                                                                .map((value) => DropdownMenuItem(
-                                                              value: value,
-                                                              child: Text("$value"),
-                                                            ))
-                                                                .toList(),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                _nachoval += value!;
-                                                              });
-                                                            }),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text("어묵탕: "),
-                                                        DropdownButton(
-                                                          //isExpanded: true,
-                                                            value: _eomooktangval,
-                                                            items: [0,1,2,3,4]
-                                                                .map((value) => DropdownMenuItem(
-                                                              value: value,
-                                                              child: Text('$value'),
-                                                            ))
-                                                                .toList(),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                _eomooktangval += value!;
-                                                              });
-                                                            }),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text("황도: "),
-                                                        DropdownButton(
-                                                          //isExpanded: true,
-                                                            value: _hwangdoval,
-                                                            items: [0,1,2,3,4]
-                                                                .map((value) => DropdownMenuItem(
-                                                              value: value,
-                                                              child: Text('$value'),
-                                                            ))
-                                                                .toList(),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                _hwangdoval += value!;
-                                                              });
-                                                            }),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text("뚱캔: "),
-                                                        DropdownButton(
-                                                          //isExpanded: true,
-                                                            value: _juicecanval,
-                                                            items: [0,1,2,3,4]
-                                                                .map((value) => DropdownMenuItem(
-                                                              value: value,
-                                                              child: Text('$value'),
-                                                            ))
-                                                                .toList(),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                _juicecanval += value!;
-                                                              });
-                                                            }),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text("혈액팩: "),
-                                                        DropdownButton(
-                                                          //isExpanded: true,
-                                                            value: _bloodpackval,
-                                                            items: [0,1,2,3,4]
-                                                                .map((value) => DropdownMenuItem(
-                                                              value: value,
-                                                              child: Text('$value'),
-                                                            ))
-                                                                .toList(),
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                _bloodpackval += value!;
-                                                              });
-                                                            }),
-                                                      ],
+                                                          setState(() {
+                                                            _fetchedData=tableStream(snapshotData!["tableNum"]);
+                                                            //super.initState();
+                                                            Navigator.of(context).pop();
+                                                          });
+                                                        }
+                                                        //context.go('/${RoutePath.home.name}');
+                                                      },
                                                     ),
                                                   ],
-                                                ),
+                                                );
+                                              }
+                                          );
+                                        });
+                                      },
+                                      child: Container(
+                                        //height: double.maxFinite,
+                                        decoration: BoxDecoration(
+                                          //color: Colors.black,
+                                        ),
+                                        child: Text("주문하기",),
+                                      )),
+                                ),
+                                // Flexible(
+                                //   flex: 1,
+                                //   child: ElevatedButton(
+                                //       style: ElevatedButton.styleFrom(
+                                //         fixedSize: const Size(double.maxFinite, double.maxFinite),
+                                //         backgroundColor: Colors.black,
+                                //         elevation: 0,
+                                //       ),
+                                //       onPressed: (){},
+                                //       child: Container(
+                                //         // height: double.maxFinite,
+                                //         child: Text("이동하기"),
+                                //       )),
+                                // ),
+                                Flexible(
+                                  flex: 1,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        fixedSize: const Size(double.maxFinite, double.maxFinite),
+                                        backgroundColor: Colors.black,
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () async{
+                                        showDialog(
+                                            context: context,
+                                            builder: (context){
+                                              return AlertDialog(
+                                                title: Text("자리비움"),
+                                                content: Text("자리를 비우시겠습니까?"),
                                                 actions: [
                                                   TextButton(
                                                     child: const Text(
@@ -451,171 +561,64 @@ class _TableDrawerWidgetState extends State<TableDrawerWidget> {
                                                     },
                                                   ),
                                                   TextButton(
-                                                    child: const Text(
-                                                      '확인',
-                                                      style: TextStyle(
-                                                        color: Colors.black,
+                                                      child: const Text(
+                                                        '확인',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    onPressed: () async {
-                                                      {
+                                                      onPressed: () async {
+                                                        final tableInfo = TableInfo(
+                                                            enteredAt: DateFormat.HOUR24_MINUTE,
+                                                            tableNum: snapshotData!["tableNum"],
+                                                            numberOfPeople: 0,
+                                                            yukhoe: 0,
+                                                            jeyuk: 0, sundae: 0,
+                                                            corncheese: 0,
+                                                            nacho: 0,
+                                                            eomooktang: 0,
+                                                            hwangdo: 0,
+                                                            moneysum: 0,
+                                                            juicecan: 0,
+                                                            bloodpack: 0,
+                                                            sexuallity: "none");
                                                         await FirebaseFirestore.instance
                                                             .collection('table_id')
                                                             .doc("table${snapshotData!["tableNum"]}")
-                                                            .update({
-                                                          "yukhoe": _yukhoeval,
-                                                          "jeyuk": _jeyukval,
-                                                          "sundae": _sundaeval,
-                                                          "corncheese": _corncheeseval,
-                                                          "nacho": _nachoval,
-                                                          "eomooktang":_eomooktangval,
-                                                          "hwangdo":_hwangdoval,
-                                                          "juicecan":_juicecanval,
-                                                          "bloodpack":_bloodpackval,
-                                                          "moneysum": _moneysumval+(_yukhoeval*priceList[0]
-                                                              +_jeyukval*priceList[1]
-                                                              +_sundaeval*priceList[2]
-                                                              +_corncheeseval*priceList[3]
-                                                              +_nachoval*priceList[4]
-                                                              +_eomooktangval*priceList[5]
-                                                              +_hwangdoval*priceList[6]
-                                                              +_juicecanval*priceList[7]
-                                                              +_bloodpackval*priceList[8]),
-                                                        });
-                                                        await FirebaseAnalytics.instance.logEvent(
-                                                            name: 'orderedMenu',
-                                                            parameters: {'yukhoe': _yukhoeval,
-                                                              'jeyuk': _jeyukval,
-                                                              'sundae': _sundaeval,
-                                                              'corncheese': _corncheeseval,
-                                                              'nacho': _nachoval,
-                                                              'eomooktang': _eomooktangval,
-                                                              'hwangdo': _hwangdoval,
-                                                              'juicecan': _juicecanval,
-                                                              'bloodpack': _bloodpackval,
-                                                            });
+                                                            .update(tableInfo.toMap());
                                                         setState(() {
-                                                          _fetchedData=tableStream(snapshotData!["tableNum"]);
-                                                          //super.initState();
+                                                          tableStream(snapshotData!["tableNum"]);
                                                           Navigator.of(context).pop();
+                                                          //context.go('/');
+                                                          Navigator.push(context,
+                                                              MaterialPageRoute(builder: (context) =>POSHome(title: "joojum")))
+                                                              .then((value) {
+                                                            setState(() {});
+                                                          });
+                                                          moveTableNum(context, snapshotData!["tableNum"]);
+                                                          //_fetchedData = tableStream(snapshotData!["tableNum"]);
+                                                          //tableWidgetFetchedData = tableStream(snapshotData!["tableNum"]);
                                                         });
                                                       }
-                                                      //context.go('/${RoutePath.home.name}');
-                                                    },
                                                   ),
                                                 ],
                                               );
-                                            }
-                                        );
-                                      });
-                                    },
-                                    child: Container(
-                                      //height: double.maxFinite,
-                                      decoration: BoxDecoration(
-                                        //color: Colors.black,
-                                      ),
-                                      child: Text("주문하기",),
-                                    )),
-                              ),
-                              // Flexible(
-                              //   flex: 1,
-                              //   child: ElevatedButton(
-                              //       style: ElevatedButton.styleFrom(
-                              //         fixedSize: const Size(double.maxFinite, double.maxFinite),
-                              //         backgroundColor: Colors.black,
-                              //         elevation: 0,
-                              //       ),
-                              //       onPressed: (){},
-                              //       child: Container(
-                              //         // height: double.maxFinite,
-                              //         child: Text("이동하기"),
-                              //       )),
-                              // ),
-                              Flexible(
-                                flex: 1,
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      fixedSize: const Size(double.maxFinite, double.maxFinite),
-                                      backgroundColor: Colors.black,
-                                      elevation: 0,
-                                    ),
-                                    onPressed: () async{
-                                      showDialog(
-                                          context: context,
-                                          builder: (context){
-                                            return AlertDialog(
-                                              title: Text("자리비움"),
-                                              content: Text("자리를 비우시겠습니까?"),
-                                              actions: [
-                                                TextButton(
-                                                  child: const Text(
-                                                    '취소',
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                                TextButton(
-                                                    child: const Text(
-                                                      '확인',
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                    onPressed: () async {
-                                                      final tableInfo = TableInfo(
-                                                          enteredAt: DateFormat.HOUR24_MINUTE,
-                                                          tableNum: snapshotData!["tableNum"],
-                                                          numberOfPeople: 0,
-                                                          yukhoe: 0,
-                                                          jeyuk: 0, sundae: 0,
-                                                          corncheese: 0,
-                                                          nacho: 0,
-                                                          eomooktang: 0,
-                                                          hwangdo: 0,
-                                                          moneysum: 0,
-                                                          juicecan: 0,
-                                                          bloodpack: 0,
-                                                          sexuallity: "none");
-                                                      await FirebaseFirestore.instance
-                                                          .collection('table_id')
-                                                          .doc("table${snapshotData!["tableNum"]}")
-                                                          .update(tableInfo.toMap());
-                                                      setState(() {
-                                                        tableStream(snapshotData!["tableNum"]);
-                                                        Navigator.of(context).pop();
-                                                        //context.go('/');
-                                                        Navigator.push(context,
-                                                            MaterialPageRoute(builder: (context) =>POSHome(title: "joojum")))
-                                                            .then((value) {
-                                                          setState(() {});
-                                                        });
-                                                        moveTableNum(context, snapshotData!["tableNum"]);
-                                                        //_fetchedData = tableStream(snapshotData!["tableNum"]);
-                                                        //tableWidgetFetchedData = tableStream(snapshotData!["tableNum"]);
-                                                      });
-                                                    }
-                                                ),
-                                              ],
-                                            );
-                                          });
-                                    },
-                                    child: Container(
-                                      //height: double.maxFinite,
-                                      child: Text("자리비움"),
-                                    )),
-                              ),
-                            ],
+                                            });
+                                      },
+                                      child: Container(
+                                        //height: double.maxFinite,
+                                        child: Text("자리비움"),
+                                      )),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const Spacer(flex: 1,)
-                      ],
+                          const SizedBox(height: 50,)
+                        ],
+                      ),
                     ),
                   ),
-                  const Spacer(flex: 1,),
+                  SizedBox(width:MediaQuery.of(context).size.width * 0.25,),
                 ],
               );
             }
